@@ -1,0 +1,56 @@
+
+<div class="field">
+    <div class="label">Familiar Name</div>
+    <div class="value">{{ object.familiar_name }}</div>
+</div>
+<div class="field">
+    <div class="label">Serial Number</div>
+    <div class="value">{{ object.serial_number }}</div>
+</div>
+<div class="field">
+    <div class="label">Model</div>
+    <div class="value">{{ object.makemodel }}</div>
+</div>
+<div class="field">
+    <div class="label">Asset Number</div>
+    <div class="value">{{ object.asset_number }}</div>
+</div>
+<div class="field">
+    <div class="label">Barcode</div>
+    <div class="value">{{ object.barcode }}</div>
+</div>
+<div class="field">
+    <div class="label">HostName</div>
+    <div class="value">{{ object.hostname }}</div>
+</div>
+<div class="field">
+    <div class="label">Roles</div>
+    <div class="value">{% for subobject in object.roles.all %}{% if not forloop.first %}, {% endif %}{{ subobject }}{% endfor %}</div>
+</div>
+<div class="field">
+    <div class="label">Home</div>
+    <div class="value">{{ object.home }}</div>
+</div>
+<div class="field">
+    <div class="label">Location</div>
+    <div class="value">{{ object.location }}</div>
+</div>
+<div class="field">
+    <div class="label">Keeper</div>
+    <div class="value">{{ object.keeper }}</div>
+</div>
+<div class="field">
+    <div class="label">Lessor</div>
+    <div class="value">{{ object.lesser }}</div>
+</div>
+<div><h2>History</h2></div>
+{% regroup object.history.all by date|date:"Y M d h:i" as dates_list %}
+  {% for date in dates_list %}
+<div>
+    {{ date.grouper }}:
+    {% for his in date.list %}
+      {% if not forloop.first %},{% endif %}
+        {{ his.description }}
+    {% endfor %}
+</div>
+{% endfor %}

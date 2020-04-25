@@ -1,0 +1,21 @@
+{{ formset.management_form }}
+{% for formsetform in formset %}
+    {% if formsetform.errors %} {{ formsetform.errors }} {% endif %}
+    {{ formsetform.id.as_hidden }}
+    {{ formsetform.spec.as_hidden }}
+    <div class="formFieldWrapper">
+        <div class="formFieldLabel">
+            {{ formsetform.get_spec_name }}:
+        </div>
+        <div class="formFieldWidget">
+            {{ formsetform.content }} 
+        </div>
+        <div class="formFieldHelp">
+            {{ formsetform.spec.help_text }}
+        </div>
+    </div>
+{% endfor %}
+
+{% comment %}
+# vim: ai et sts=4 sw=4 ts=4
+{% endcomment %}

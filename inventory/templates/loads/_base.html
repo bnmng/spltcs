@@ -1,0 +1,57 @@
+{% extends 'spltcs/_base.html' %}
+{% load static %}
+{% block subtitle %}
+- Loads
+{% endblock %}
+{% block stylesheets %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'spltcs/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'loads/loads.css' %}">
+{% endblock %}
+{% block subheader %}
+- Loads
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block javascript %}
+{% comment %}
+<script type="text/javascript">
+    function openOrCloseModelForm( button ) {
+        var fieldName = button.id.substr(11,20);
+        var addForm = button.getAttribute('data-add_url');
+        if( 'Cancel' == button.innerHTML ) {
+            var iframe = document.getElementById('iframe_' + fieldName);
+            iframe.remove();
+            button.innerHTML=button.getAttribute('data-label');
+        }
+        else {
+            var iframe = document.createElement('iframe');
+            iframe.id = 'iframe_' + fieldName;
+            iframe_src = addForm;
+            iframe.src=iframe_src;
+            button.parentNode.insertBefore(iframe, button);
+            button.innerHTML = 'Cancel';
+        }
+    }
+
+    var addButtons = document.getElementsByTagName('button');
+    for( b=0; b < addButtons.length; b++ ) {
+        if(addButtons[b].getAttribute('id') ) {
+            if('button_add' == addButtons[b].getAttribute('id').substr(0,10) ) {
+                var button = addButtons[b];
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openOrCloseModelForm(e.target);
+                });
+            }
+        }
+    }
+                
+        
+        
+</script>
+{% endcomment %}
+{% endblock %}
+{% comment %}
+# vim: ai et sts=4 sw=4 ts=4
+{% endcomment %}

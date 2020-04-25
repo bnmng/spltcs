@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>
+		Suffolk Public Library  - Technology and Content Strategy
+	</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{% static 'spltcs/main.css' %}"/>
+    {% endblock %}
+
+</head>
+<body>
+<div id="container">
+    <div id="page-header">
+        <div id="header-logo">
+        </div>
+        <div id="header-title">
+            <h1>
+                Suffolk Public Library  - Technology and Content Strategy
+            </h1>
+        </div>
+    </div>
+    {% include 'spltcs/menu.html' %}
+    <div id = "subheader">
+    {% block subheader %}
+        <h2>Technology and Content Strategy</h2>
+    {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+{% block javascript %}
+{% endblock %}
+</body>
+</html>
+{% comment %}
+vim: ai et sts=4 sw=4 ts=4
+{% endcomment %}

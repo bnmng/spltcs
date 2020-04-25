@@ -1,0 +1,14 @@
+.field {
+  display:flex;
+  border-bottom:1px solid blue;
+}
+.field:last-child {
+  border-top:1px solid blue;
+}
+.field .label {
+  width:20%;
+}
+.field .value {
+  width:80%;
+}
+
