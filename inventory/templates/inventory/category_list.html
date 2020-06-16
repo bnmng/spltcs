@@ -1,0 +1,102 @@
+{% extends './_base.html' %}
+
+{% block content %}
+    <h2>Roles</h2>
+    {% if perms.inventory.add_category %}
+        <div class="actions">
+            <a href="{% url 'category_create' %}">Add</a>
+        </div>
+    {% endif %}
+    {% if object_list %}
+    <div class="object_list">
+        <div class="row">
+            <div class="cell span1">&nbsp;</div>
+            {% include 'spltcs/_list_head.html' with label='Name'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Description'  span='2' %}
+        </div>
+        {% for object in object_list %}
+            <div class="row">
+                <div class="cell span1">
+                    <div>{% if perms.inventory.view_category %}<a href="{% url 'role_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
+                    <div>{% if perms.inventory.change_category %}<a href="{% url 'role_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
+                </div>
+                {% include 'spltcs/_list_field.html' with column=object.name  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.description  span='2' %}
+                
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+    var openSearchDiv = document.createElement('div');
+    openSearchDiv.id = 'div_open_query';
+    openSearchDiv.innerHTML=('<p><a href="#">Open Search Form</a></p>');
+    var searchDiv = document.getElementById('div_query');
+    searchDiv.parentNode.insertBefore(openSearchDiv, searchDiv);
+    searchDiv.style.display="none";
+    openSearchDiv.addEventListener('click', function(e) {
+        e.preventDefault();
+        openSearchForm();
+    });
+    function openSearchForm() {
+        var openSearchDiv = document.getElementById('div_open_query');
+        var searchDiv = document.getElementById('div_query');
+        if('none'==searchDiv.style.display) {
+            searchDiv.style.display="block";
+            openSearchDiv.innerHTML=('<p><a href="#">Hide Search Form</a></p>');
+        } else {
+            searchDiv.style.display="none";
+            openSearchDiv.innerHTML=('<p><a href="#">Open Search Form</a></p>');
+        }
+
+    }
+    function clearAllFilterUses() {
+        filter_use_checkboxes = document.getElementsByClassName("filter_use");
+        for ( f = 0; f < filter_use_checkboxes.length; f++ ) {
+            filter_use_checkboxes[f].checked = false;
+        }
+        document.getElementById("chk_filter_use_clear").checked=false;
+    }
+    document.getElementById("chk_filter_use_clear").addEventListener("click", function(e) {
+        e.preventDefault;
+        clearAllFilterUses();
+    });
+    function checkFilterUse( filter_use_checkbox ) {
+        filter_use_checkbox.checked="checked";
+    }
+    filter_values = document.getElementsByClassName("filter_value");
+
+    for ( f = 0; f < filter_values.length; f++ ) {
+        filter_values[f].addEventListener("keydown", function(e) {
+            var parent = e.target.parentNode;
+            for( p=0; p<5; p++ ) {
+                filter_use_checkboxes = parent.getElementsByClassName("filter_use");
+                if( 1 == filter_use_checkboxes.length ) {
+                    filter_use_checkboxes[0].checked="checked";
+                    break;
+                }
+                parent = parent.parentNode;
+            }
+        });
+        filter_values[f].addEventListener("click", function(e) {
+            var parent = e.target.parentNode;
+            for( p=0; p<5; p++ ) {
+                filter_use_checkboxes = parent.getElementsByClassName("filter_use");
+                if( 1 == filter_use_checkboxes.length ) {
+                    filter_use_checkboxes[0].checked="checked";
+                    break;
+                }
+                parent = parent.parentNode;
+            }
+        });
+    }
+        
+</script>
+{% endblock %}
+
+{% comment %}
+vim: ai et sts=4 ts=4 sw=4
+{% endcomment %}

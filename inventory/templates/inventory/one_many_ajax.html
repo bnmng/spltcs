@@ -4,7 +4,7 @@
 {{ form.non_field_errors }}
 {% csrf_token %}
 {% for field in form %}
-{% include './_form_field.html' with formfield=field %}
+{% include 'spltcs/_form_field.html' with formfield=field %}
 {% endfor %}
 <div class="formFieldWrapper">
     <div class="formSubmit">

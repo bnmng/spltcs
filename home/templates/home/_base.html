@@ -1,48 +1,8 @@
+{% extends 'spltcs/_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>
-		SPLTCS Suffolk Data 
-        {% block subtitle %}
-        {% endblock %}
-	</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{% static 'spltcs/main.css' %}"/>
-    {% endblock %}
-
-</head>
-<body>
-<div id="container">
-    <div id="page-header">
-        <div id="header-logo">
-        </div>
-        <div id="header-title">
-            <h1>
-            Suffolk Public Library<br />
-            Technology and Content Strategy
-            {% block subheader %}
-            {% endblock %}
-            </h1>
-        </div>
-    </div>
-    {% include 'spltcs/menu.html' %}
-    <div id = "sub-header">
-        <h2>SPLTCS</h2>
-    </div>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
-</div>
-{% block javascript %}
+{% block app_title %}
+- Home
 {% endblock %}
-</body>
-</html>
-{% comment %}
-vim: ai et sts=4 sw=4 ts=4
-{% endcomment %}
+{% block appheader %}
+<h1>Home</h1>
+{% endblock %}

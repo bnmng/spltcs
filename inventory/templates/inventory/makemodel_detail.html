@@ -1,0 +1,25 @@
+{% extends './_base.html' %}
+{% block objectheader %}
+<h2>{{ object }}</h2>
+{% endblock %}
+{% block objectmenu %}
+<div class="menuitem">
+	<a href="{% url 'makemodel_list' %}">List</a>
+</div>
+<div class="menuitem">
+	<a href="{% url 'makemodel_detail' object.pk %}">Detail</a>
+</div>
+{% if perms.inventory.change_makemodel %}
+<div class="menuitem">
+	<a href="{% url 'makemodel_update' object.pk %}">Update</a>
+</div>
+{% endif %}
+{% if perms.inventory.delete_makemodel %}
+<div class="menuitem">
+	<a href="{% url 'makemodel_delete' object.pk %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+	{% include './makemodel_detail_include.html' %}
+{% endblock %}

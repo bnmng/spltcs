@@ -1,0 +1,38 @@
+{% extends './_base.html' %}
+
+{% block content %}
+    <h2>Locations</h2>
+    {% if perms.inventory.add_location %}
+        <div class="actions">
+            <a href="{% url 'location_create' %}">Add</a>
+        </div>
+    {% endif %}
+    {% if object_list %}
+    <div class="object_list">
+        <div class="row">
+            <div class="cell span1">&nbsp;</div>
+            {% include 'spltcs/_list_head.html' with label='Name'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Abbreviation'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Priority'  span='2' %}
+        </div>
+        {% for object in object_list %}
+            <div class="row">
+                <div class="cell span1">
+                    <div>{% if perms.inventory.view_item %}<a href="{% url 'item_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
+                    <div>{% if perms.inventory.change_item %}<a href="{% url 'item_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
+                </div>
+                {% include 'spltcs/_list_field.html' with column=object.name  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.abbreviation  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.priority  span='5' %}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% endblock %}
+
+{% comment %}
+vim: ai et sts=4 ts=4 sw=4
+{% endcomment %}

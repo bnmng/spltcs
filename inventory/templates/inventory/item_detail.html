@@ -1,8 +1,25 @@
 {% extends './_base.html' %}
+{% block objectheader %}
+<h2>{{ object }}</h2>
+{% endblock %}
+{% block objectmenu %}
+<div class="menuitem">
+	<a href="{% url 'item_list' %}">List</a>
+</div>
+<div class="menuitem">
+	<a href="{% url 'item_detail' object.pk %}">Detail</a>
+</div>
+{% if perms.inventory.change_item %}
+<div class="menuitem">
+	<a href="{% url 'item_update' object.pk %}">Update</a>
+</div>
+{% endif %}
+{% if perms.inventory.delete_item %}
+<div class="menuitem">
+	<a href="{% url 'item_delete' object.pk %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
 {% block content %}
-
-	<div><a href="{% url 'item-update' object.pk %}">Edit</a></div>
-	<div><a href="{% url 'item-delete' object.pk %}">Delete</a></div>
-
 	{% include './item_detail_include.html' %}
 {% endblock %}

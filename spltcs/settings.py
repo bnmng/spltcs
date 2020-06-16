@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v(_m#5r5kjv*mggh7v!n*)n*d-0o)dg2s^y#j40re_xd6wm!s#'
+#SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.56.101', '5.182.50.42', 'spltcs.bnmng.us', 'spltcs.bnmng.com']
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.56.101', '5.182.50.42', 'spltcs.bnmng.us', 'spltcs.bnmng.com']
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'inventory.apps.InventoryConfig',
     'entities.apps.EntitiesConfig',
+    'maintenance.apps.MaintenanceConfig',
     'varifields.apps.VarifieldsConfig',
 ]
 
@@ -84,15 +85,15 @@ WSGI_APPLICATION = 'spltcs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'host': 'localhost',
-        'NAME': 'spltcs2020',
-        'USER': 'splvirginia',
-        'PASSWORD': 'Nionfiei+01',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'host': 'localhost',
+#        'NAME': 'spltcs_dev',
+#        'USER': 'splvirginia',
+#        'PASSWORD': 'Nionfiei+01',
+#    }
+#}
 
 
 # Password validation
@@ -132,5 +133,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = 'https://static.bnmng.com/spltcs/'
-STATIC_ROOT = '/var/www/static/spltcs/'
+# STATIC_URL = 'https://static.bnmng.com/spltcs_dev/'
+# STATIC_ROOT = '/var/www/static/spltcs_dev/'
+
+
+from .settings_local import *

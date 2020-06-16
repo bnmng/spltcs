@@ -1,56 +1,39 @@
 {% extends 'spltcs/_base.html' %}
 {% load static %}
-{% block subtitle %}
+{% block app_title %}
 - Inventory 
 {% endblock %}
-{% block stylesheets %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'spltcs/main.css' %}">
+{% block headstyles %}
 <link rel="stylesheet" type="text/css" href="{% static 'inventory/inventory.css' %}">
 {% endblock %}
-{% block subheader %}
-- Inventory
+{% block appheader %}
+<h1>Inventory</h1>
+{% endblock %}
+{% block appmenu %}
+    {% if user.is_authenticated %}
+        <div id="appmenu" class="menubar" >
+            <div class="menuitem ">
+                <a href="{% url 'item_list' %}">Items</a>
+            </div>
+            <div class="menuitem ">
+                <a href="{% url 'makemodel_list' %}">Models</a>
+            </div>
+            <div class="menuitem ">
+                <a href="{% url 'role_list' %}">Roles</a>
+            </div>
+            <div class="menuitem ">
+                <a href="{% url 'category_list' %}">Categories</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block objectheader %}
+{% endblock %}
+{% block objectemenu %}
 {% endblock %}
 {% block content %}
 {% endblock %}
 {% block javascript %}
-{% comment %}
-<script type="text/javascript">
-    function openOrCloseModelForm( button ) {
-        var fieldName = button.id.substr(11,20);
-        var addForm = button.getAttribute('data-add_url');
-        if( 'Cancel' == button.innerHTML ) {
-            var iframe = document.getElementById('iframe_' + fieldName);
-            iframe.remove();
-            button.innerHTML=button.getAttribute('data-label');
-        }
-        else {
-            var iframe = document.createElement('iframe');
-            iframe.id = 'iframe_' + fieldName;
-            iframe_src = addForm;
-            iframe.src=iframe_src;
-            button.parentNode.insertBefore(iframe, button);
-            button.innerHTML = 'Cancel';
-        }
-    }
-
-    var addButtons = document.getElementsByTagName('button');
-    for( b=0; b < addButtons.length; b++ ) {
-        if(addButtons[b].getAttribute('id') ) {
-            if('button_add' == addButtons[b].getAttribute('id').substr(0,10) ) {
-                var button = addButtons[b];
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openOrCloseModelForm(e.target);
-                });
-            }
-        }
-    }
-                
-        
-        
-</script>
-{% endcomment %}
 {% endblock %}
 {% comment %}
 # vim: ai et sts=4 sw=4 ts=4

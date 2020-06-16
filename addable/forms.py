@@ -16,8 +16,3 @@ class AddableMultiple(forms.SelectMultiple):
 class AdditionalInfo(forms.CheckboxSelectMultiple):
     template_name = 'addable/additional_info.html'
     input_type = 'hidden'
-
-
-
-
-

@@ -1,0 +1,141 @@
+div#page-header {
+  display:grid;
+  grid-template-columns:1fr, 5fr;
+}
+
+div#header-logo {
+  grid-row-start:1;
+  grid-column: 1 / span 1;
+}
+
+div#header-title {
+  grid-row-start:1;
+  grid-column: 2 / span 1;
+}
+
+div#appheader h1 {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+div#objectheader h2 {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+div.menubar {
+  display:grid;
+  grid-auto-columns:1fr;
+  width:100%;
+  background-color:#494946;
+  color:white;
+}
+
+div.menuitem {
+  grid-column-start:auto;
+  grid-row-start:1;
+  text-align:center;
+  background-color:#494946;
+}
+
+div.meuitem, div.menuitem a {
+  color:white;
+}
+
+div.row {
+  display:grid;
+  grid-auto-columns:1fr;
+  width:100%;
+}
+
+div.cell, div.cellHead {
+  grid-column-start:auto;
+  grid-row-start:1;
+	border:1px solid black;
+	overflow-x:hidden;
+}
+
+div.cellHead {
+  color:#07c;
+}
+
+div.span1 {
+  grid-column-end: span 1;
+}
+div.span2 {
+  grid-column-end: span 2;
+}
+div.span3 {
+  grid-column-end: span 3;
+}
+div.span4 {
+  grid-column-end: span 4;
+}
+div.span5 {
+  grid-column-end: span 5;
+}
+div.span6 {
+  grid-column-end: span 6;
+}
+
+div.formFieldWrapper {
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows:repeat(2, 1fr);
+  margin-bottom:1em;
+}
+
+div.formFieldLabel {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+div.formFieldWidget {
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 4;
+}
+
+div.formFieldDelete {
+  grid-row: 1 / span 1;
+  grid-column: 6 / span 1;
+}
+
+div.formFieldHelp {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 5;
+}
+
+div.detailFieldWrapper {
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows:repeat(2, 1fr);
+  margin-bottom:.5em;
+}
+
+div.detailFieldLabel {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+div.detailFieldLabel {
+  color:#07c;
+  font-weight:bold;
+}
+
+div.detailFieldWidget {
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 5;
+}
+div.detailFieldHelp {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 5;
+}
+
+option.sympTaken {
+  color:#ccc;
+  font-style:italic;
+}
+
+button.delete {
+  background-color:red;
+}

@@ -4,10 +4,10 @@
 {{ form.non_field_errors }}
 {% csrf_token %}
 
-{% include './_form_field.html' with formfield=form.kind %}
-{% include './_form_field.html' with formfield=form.name %}
-{% include './_form_field.html' with formfield=form.part_of %}
-{% include './_form_field.html' with formfield=form.user %}
+{% include 'spltcs/_form_field.html' with formfield=form.kind %}
+{% include 'spltcs/_form_field.html' with formfield=form.name %}
+{% include 'spltcs/_form_field.html' with formfield=form.part_of %}
+{% include 'spltcs/_form_field.html' with formfield=form.user %}
 
 </form>
 {% endblock %}

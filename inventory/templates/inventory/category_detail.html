@@ -1,0 +1,26 @@
+{% extends './_base.html' %}
+{% load static %}
+{% block objectheader %}
+<h2>{{ object }}</h2>
+{% endblock %}
+{% block objectmenu %}
+<div class="menuitem">
+	<a href="{% url 'category_list' %}">List</a>
+</div>
+<div class="menuitem">
+	<a href="{% url 'category_detail' object.pk %}">Detail</a>
+</div>
+{% if perms.inventory.change_category %}
+<div class="menuitem">
+	<a href="{% url 'category_update' object.pk %}">Update</a>
+</div>
+{% endif %}
+{% if perms.inventory.delete_category %}
+<div class="menuitem">
+	<a href="{% url 'category_delete' object.pk %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+	{% include './category_detail_include.html' %}
+{% endblock %}
