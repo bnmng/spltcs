@@ -1,0 +1,34 @@
+{% extends 'spltcs/_base.html' %}
+{% load static %}
+{% block app_title %}
+- Inventory 
+{% endblock %}
+{% block headstyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'entities/entities.css' %}">
+{% endblock %}
+{% block appheader %}
+<h1>Inventory</h1>
+{% endblock %}
+{% block appmenu %}
+    {% if user.is_authenticated %}
+        <div id="appmenu" class="menubar" >
+            <div class="menuitem ">
+                <a href="{% url 'entity_list' %}">Entities</a>
+            </div>
+            <div class="menuitem ">
+                <a href="{% url 'roll_list' %}">Rolls</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block objectheader %}
+{% endblock %}
+{% block objectemenu %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+{% comment %}
+# vim: ai et sts=4 sw=4 ts=4
+{% endcomment %}

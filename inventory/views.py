@@ -371,19 +371,19 @@ class ItemAjaxSuccessLocation(PermissionRequiredMixin, UpdateView):
 
 
 class ItemAjaxEntity(PermissionRequiredMixin, CreateView):
-    permission_required = "inventory.add_entity"
+    permission_required = "inventory.add_person"
     model = Entity
     form_class = EntityForm
-    template_name = "inventory/item_ajax_entity.html"
+    template_name = "inventory/item_ajax_person.html"
 
     def get_success_url(self):
-        return reverse_lazy("item_ajaxsuccess_entity", kwargs={'pk': self.object.id})
+        return reverse_lazy("item_ajaxsuccess_person", kwargs={'pk': self.object.id})
 
 class ItemAjaxSuccessEntity(PermissionRequiredMixin, UpdateView):
-    permission_required = "inventory.add_entity"
+    permission_required = "inventory.add_person"
     model = Entity
     form_class = EntityForm
-    template_name = "inventory/item_ajax_entity.html"
+    template_name = "inventory/item_ajax_person.html"
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

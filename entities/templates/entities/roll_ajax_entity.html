@@ -1,0 +1,27 @@
+{% extends 'entities/_ajax.html' %}
+{% block content %}
+<form method="POST" id="form">
+{{ form.non_field_errors }}
+{% csrf_token %}
+
+{% include 'spltcs/_form_field.html' with formfield=form.name %}
+{% include 'spltcs/_form_field.html with formfield=form.entity_type %}
+{% include 'spltcs/_form_field.html with formfield=form.full_name %}
+{% include 'spltcs/_form_field.html with formfield=form.short_name %}
+{% include 'spltcs/_form_field.html with formfield=form.sort_code %}
+{% include 'spltcs/_form_field.html with formfield=form.member_of %}
+{% include 'spltcs/_form_field.html with formfield=form.supervisor %}
+{% include 'spltcs/_form_field.html with formfield=form.job_title %}
+{% include 'spltcs/_form_field.html with formfield=form.user %}
+
+</form>
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+  if("{{ success }}"){
+    window.parent.updateSelects(window.frameElement, '{{ object.pk }}', '{{ object }}');
+  }
+</script>
+{% endblock %}
+

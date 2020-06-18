@@ -1,0 +1,36 @@
+.fieldWrapper {
+  display:flex;
+  width:100%;
+}
+.queryFieldCheck {
+  flex:0 1 5%;
+}
+.queryFieldLabel {
+  flex:0 1 15%;
+}
+.queryFieldOperator {
+  flex:0 1 15%;
+}
+.queryFieldWidget {
+  flex:1 1 0%;
+}
+
+#div_recall_query .queryFieldWidget {
+  flex:0 1 15%;
+}
+
+
+
+.field {
+  border-bottom:1px solid blue;
+}
+.field:last-child {
+  border-top:1px solid blue;
+}
+.field .label {
+  width:20%;
+}
+.field .value {
+  width:80%;
+}
+

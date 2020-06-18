@@ -1,0 +1,36 @@
+{% extends './_base.html' %}
+{% load static %}
+{% block objectheader %}
+<h2>{{ object }} - Delete</h2>
+{% endblock %}
+{% block objectmenu %}
+<div class="menuitem">
+	<a href="{% url 'entity_list' %}">List</a>
+</div>
+<div class="menuitem">
+	<a href="{% url 'entity_detail' object.pk %}">Detail</a>
+</div>
+{% if perms.entities.change_entity %}
+<div class="menuitem">
+	<a href="{% url 'entity_update' object.pk %}">Update</a>
+</div>
+{% endif %}
+{% if perms.entities.delete_entity %}
+<div class="menuitem">
+	<a href="{% url 'entity_delete' object.pk %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+	<form method="post">
+		{% csrf_token %}
+    <div class="formFieldWrapper">
+      <div class="formFieldLabel">
+      </div>
+      <div class="formFieldWrapper">
+        <button type="submit" id="button_delete">Confirm Delete</button>
+      </div>
+    </div>
+  </form>
+  {% include './entity_detail_include.html' %}
+{% endblock %}

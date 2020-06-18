@@ -1,0 +1,28 @@
+{% extends './_base.html' %}
+{% load static %}
+{% block objectheader %}
+<h2>{{ object }}</h2>
+{% endblock %}
+{% block objectmenu %}
+<div class="menuitem">
+	<a href="{% url 'roll_list' %}">List</a>
+</div>
+<div class="menuitem">
+	<a href="{% url 'roll_detail' object.pk %}">Detail</a>
+</div>
+{% if perms.entities.change_roll %}
+<div class="menuitem">
+	<a href="{% url 'roll_update' object.pk %}">Update</a>
+</div>
+{% endif %}
+{% if perms.entities.delete_roll %}
+<div class="menuitem">
+	<a href="{% url 'roll_delete' object.pk %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+{% include './roll_form_include.html' %}
+{% endblock %}
+
+

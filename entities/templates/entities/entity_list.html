@@ -1,0 +1,38 @@
+{% extends './_base.html' %}
+{% load static %}
+{% block content %}
+                                
+    <h2>Entities</h2>
+    {% if perms.entities.add_entity %}
+        <div class="actions">
+            <a href="{% url 'entity_create' %}">Add</a>
+        </div>
+    {% endif %}
+    {% if object_list %}
+    <div class="object_list">
+        <div class="row">
+            <div class="cell span1">&nbsp;</div>
+            {% include 'spltcs/_list_head.html' with label='Full Name'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Short Name'  span='2' %}
+        </div>
+        {% for object in object_list %}
+            <div class="row">
+                <div class="cell span1">
+                    <div>{% if perms.entities.view_entity %}<a href="{% url 'entity_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
+                    <div>{% if perms.entities.change_entity %}<a href="{% url 'entity_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
+                </div>
+                {% include 'spltcs/_list_field.html' with column=object.full_name  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.short_name  span='2' %}
+                
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% endblock %}
+
+{% comment %}
+vim: ai et sts=4 ts=4 sw=4
+{% endcomment %}
