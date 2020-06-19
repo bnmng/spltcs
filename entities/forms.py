@@ -63,6 +63,9 @@ class Entity_EntityXRollForm(ModelForm):
         fields = [
             'roll',
         ]
+        widgets = {
+            'roll': Addable(attrs={'data-add_url':reverse_lazy('entity_ajax_roll'), 'data-secondaries':''}),
+        }
 
 class Roll_EntityXRollForm(ModelForm):
     class Meta:
@@ -76,6 +79,4 @@ Entity_SMSPhoneFormset=inlineformset_factory(Entity, SMSPhone, form=Entity_SMSPh
 Entity_EmailFormset=inlineformset_factory(Entity, Email, form=Entity_EmailForm, extra=1)
 Entity_EntityXRollFormset=inlineformset_factory(Entity, EntityXRoll, form=Entity_EntityXRollForm, extra=1)
 Roll_EntityXRollFormset=inlineformset_factory(Roll, EntityXRoll, form=Roll_EntityXRollForm, extra=1)
-Roll_EntityXRollFormset
-# vim ai et ts=4 sts=4 sw=4
 # vim ai et ts=4 sts=4 sw=4

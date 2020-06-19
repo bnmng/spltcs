@@ -29,6 +29,7 @@
     {% include 'spltcs/_form_field.html' with formfield=form.user %}
     {{ entityxrolls.management_form }}
     {% for subform in entityxrolls.forms %}
+    {% if forloop.first %}  {{ subform.media }} {% endif %}
       {% for hidden in subform.hidden_fields %}
         {{ hidden }}
       {% endfor %}

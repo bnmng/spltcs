@@ -1,4 +1,4 @@
-from .forms import (  EntityForm, Entity_VoicePhoneFormset, Entity_SMSPhoneFormset, Entity_EmailFormset, RollForm, Entity_EntityXRollFormset, Roll_EntityXRollFormset)
+from .forms import (  EntityForm,  Entity_VoicePhoneFormset, Entity_SMSPhoneFormset, Entity_EmailFormset, RollForm, Entity_EntityXRollFormset, Roll_EntityXRollFormset)
 from .models import( Entity, VoicePhone, SMSPhone, Email, Roll )
 from datetime import date, timedelta
 from django.contrib.auth import (get_user, get_user_model,)
@@ -42,7 +42,7 @@ class EntityCreate(PermissionRequiredMixin, CreateView):
         response = super().form_valid(form)
         self.object = form.save()
 
-        entityxrolls=Roll_EntityXRollFormset(self.request.POST)
+        entityxrolls=Entity_EntityXRollFormset(self.request.POST)
         if entityxrolls.is_valid():
             entityxrolls.instance = self.object
             entityxrolls.save()

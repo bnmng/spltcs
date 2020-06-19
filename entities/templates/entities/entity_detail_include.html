@@ -1,12 +1,8 @@
 
-{% include 'spltcs/_detail_field.html' with detailfield=object.familiar_name label='Familiar Name' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.serial_number label='Serial Number' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.makemodel label='Model' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.asset_number label='Asset Number' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.barcode label='Barcode' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.hostname label='HostName' %}
-{% include 'spltcs/_detail_many_field.html' with detailfield=object.roles label='Roles' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.home label='Home' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.location label='Location' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.keeper label='Keeper' %}
-{% include 'spltcs/_detail_field.html' with detailfield=object.lesser label='Lessor' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.get_entity_type_display label='Entity Type' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.full_name label='Full Name' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.short_name label='Short Name' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.member_of label='Member Of' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.supervisor label='Supervisor' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.job_title label='Job Title' %}
+{% include 'spltcs/_detail_field.html' with detailfield=object.user label='User' %}
