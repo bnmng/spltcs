@@ -1,0 +1,54 @@
+{% if thisview=="list" %}
+  <div class="menuitem this">
+    List
+  </div>
+{% else %}
+  <div class="menuitem">
+    <a href="{% url 'role_list' %}">List</a>
+  </div>
+{% endif %}
+{% if perms.inventory.add_role %}
+  {% if thisview=="create" %}
+    <div class="menuitem this">
+      Create
+    </div>
+  {% endif %}
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'role_create' %}">Create</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.inventory.view_role %}
+  {% if thisview=="detail" %}
+    <div class="menuitem this">
+      Detail
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'role_detail' object.pk %}">Detail</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.inventory.change_role %}
+  {% if thisview=="update" %}
+    <div class="menuitem this">
+      Update
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'role_update' object.pk %}">Update</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.inventory.delete_role %}
+  {% if thisview=="delete" %}
+    <div class="menuitem this">
+      Delete
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'role_delete' object.pk %}">Delete</a>
+    </div>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,54 @@
+{% if thisview=="list" %}
+  <div class="menuitem this">
+    List
+  </div>
+{% else %}
+  <div class="menuitem">
+    <a href="{% url 'entity_list' %}">List</a>
+  </div>
+{% endif %}
+{% if perms.entities.add_entity %}
+  {% if thisview=="create" %}
+    <div class="menuitem this">
+      Create
+    </div>
+  {% endif %}
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'entity_create' %}">Create</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.entities.view_entity %}
+  {% if thisview=="detail" %}
+    <div class="menuitem this">
+      Detail
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'entity_detail' object.pk %}">Detail</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.entities.change_entity %}
+  {% if thisview=="update" %}
+    <div class="menuitem this">
+      Update
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'entity_update' object.pk %}">Update</a>
+    </div>
+  {% endif %}
+{% endif %}
+{% if perms.entities.delete_entity %}
+  {% if thisview=="delete" %}
+    <div class="menuitem this">
+      Delete
+    </div>
+  {% else %}
+    <div class="menuitem">
+      <a href="{% url 'entity_delete' object.pk %}">Delete</a>
+    </div>
+  {% endif %}
+{% endif %}
