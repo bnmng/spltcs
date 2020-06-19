@@ -1,5 +1,5 @@
 from .forms import (  CategoryForm, ItemForm, ItemQueryForm, Item_ItemXRoleFormset, LocationForm, MakeModelForm, MakeModel_MakeModelXCategoryFormset, RecallItemQueryForm, RoleForm, Role_ItemXRoleFormset )
-from .models import(ItemQuery, Category, Item, ItemHistory, Location, MakeModel, Role, UserParameters,)
+from .models import(ItemQuery, ItemXRole, Category, Item, ItemHistory, Location, MakeModel, Role, UserParameters,)
 from datetime import date, timedelta
 from django.contrib.auth import (get_user, get_user_model,)
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -211,15 +211,17 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
     
         if 'duplicate' in form.cleaned_data:
             if True == form.cleaned_data['duplicate']:
-                print(inspect.currentframe().f_lineno)
-                print("pk=")
-                print(self.object.pk)
+                oldpk=self.object.pk
                 self.object.pk=None
                 self.object.familiar_name = '[copy]' + self.object.familiar_name
                 self.object.save()
-                print(inspect.currentframe().f_lineno)
-                print("pk=")
-                print(self.object.pk)
+                
+                itemxroles = ItemXRole.objects.filter(item_id=oldpk);
+                for itemxrole in itemxroles:
+                    print ( inspect.currentframe().f_lineno )
+                    itemxrole.pk=None
+                    itemxrole.item_id=self.object.pk
+                    itemxrole.save()
 
                 return redirect( reverse_lazy('item_update', kwargs={'pk': self.object.id }))
 
@@ -282,6 +284,22 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
                 print(sys.exc_info()[0])
                 print(sys.exc_info()[1])
                 print(sys.exc_info()[2].tb_lineno)
+
+        if 'duplicate' in form.cleaned_data:
+            if True == form.cleaned_data['duplicate']:
+                oldpk=self.object.pk
+                self.object.pk=None
+                self.object.familiar_name = '[copy]' + self.object.familiar_name
+                self.object.save()
+
+                itemxroles = ItemXRole.objects.filter(item_id=oldpk);
+                for itemxrole in itemxroles:
+                    print ( inspect.currentframe().f_lineno )
+                    itemxrole.pk=None
+                    itemxrole.item_id=self.object.pk
+                    itemxrole.save()
+                
+                return redirect( reverse_lazy('item_update', kwargs={'pk': self.object.id }))
 
         return response
 
