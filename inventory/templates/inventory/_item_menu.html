@@ -1,4 +1,4 @@
-{% if thisview=="list" %}
+{% if thisview == "list" %}
   <div class="menuitem this">
     List
   </div>
@@ -8,11 +8,10 @@
   </div>
 {% endif %}
 {% if perms.inventory.add_item %}
-  {% if thisview=="create" %}
+  {% if thisview == "create" %}
     <div class="menuitem this">
       Create
     </div>
-  {% endif %}
   {% else %}
     <div class="menuitem">
       <a href="{% url 'item_create' %}">Create</a>
@@ -20,8 +19,12 @@
   {% endif %}
 {% endif %}
 {% if perms.inventory.view_item %}
-  {% if thisview=="detail" %}
+  {% if thisview == "detail" %}
     <div class="menuitem this">
+      Detail
+    </div>
+  {% elif thisview == "list" or thisview == "create" %}
+    <div class="menuitem unavailable">
       Detail
     </div>
   {% else %}
@@ -31,8 +34,12 @@
   {% endif %}
 {% endif %}
 {% if perms.inventory.change_item %}
-  {% if thisview=="update" %}
+  {% if thisview == "update" %}
     <div class="menuitem this">
+      Update
+    </div>
+  {% elif thisview == "list" or thisview == "create" %}
+    <div class="menuitem unavailable">
       Update
     </div>
   {% else %}
@@ -42,8 +49,12 @@
   {% endif %}
 {% endif %}
 {% if perms.inventory.delete_item %}
-  {% if thisview=="delete" %}
+  {% if thisview == "delete" %}
     <div class="menuitem this">
+      Delete
+    </div>
+  {% elif thisview == "list" or thisview == "create" %}
+    <div class="menuitem unavailable">
       Delete
     </div>
   {% else %}

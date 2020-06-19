@@ -1,12 +1,12 @@
 {% extends './_base.html' %}
-
+{% load static %}
+{% block objectheader %}
+<h2>Roles</h2>
+{% endblock %}
+{% block objectmenu %}
+    {% include './_role_menu.html' with thisview='list' %}
+{% endblock %}
 {% block content %}
-    <h2>Roles</h2>
-    {% if perms.inventory.add_role %}
-        <div class="actions">
-            <a href="{% url 'role_create' %}">Add</a>
-        </div>
-    {% endif %}
     {% if object_list %}
     <div class="object_list">
         <div class="row">

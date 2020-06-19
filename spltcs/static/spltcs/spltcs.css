@@ -142,10 +142,9 @@ button.delete {
 
 menuitem.this {
   font-weight:bold;
-  text-decoration:none;
 }
 
-menuitem.disabled {
+menuitem.unavailable {
   color:grey;
 }
 

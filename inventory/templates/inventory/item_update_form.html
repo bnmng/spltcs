@@ -4,7 +4,7 @@
 <h2>{{ object }}</h2>
 {% endblock %}
 {% block objectmenu %}
-  {% include './_item_menu.html with thisview='update' %}
+  {% include './_item_menu.html' with thisview='update' %}
 {% endblock %}
 {% block content %}
 {% include './item_form_include.html' %}

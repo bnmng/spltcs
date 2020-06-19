@@ -1,14 +1,13 @@
 {% extends './_base.html' %}
 {% load static %}
-
+{% block object header %}
+<h2>Models</h2>
+{% endblock %}
+{% block objectmenu %}
+    {% include './_makemodel_menu.html' with thisview='list' %}
+{% endblock %}
 {% block content %}
                                 
-    <h2>Models</h2>
-    {% if perms.inventory.add_makemodel %}
-        <div class="actions">
-            <a href="{% url 'makemodel_create' %}">Add</a>
-        </div>
-    {% endif %}
     {% if object_list %}
     <div class="object_list">
         <div class="row">

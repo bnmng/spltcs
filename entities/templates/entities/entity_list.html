@@ -1,13 +1,12 @@
 {% extends './_base.html' %}
 {% load static %}
+{% block objectheader %}
+<h2>Entities</h2>
+{% endblock %}
+{% block objectmenu %}
+    {% include './_entity_menu.html' with thisview='list' %}
+{% endblock %}
 {% block content %}
-                                
-    <h2>Entities</h2>
-    {% if perms.entities.add_entity %}
-        <div class="actions">
-            <a href="{% url 'entity_create' %}">Add</a>
-        </div>
-    {% endif %}
     {% if object_list %}
     <div class="object_list">
         <div class="row">

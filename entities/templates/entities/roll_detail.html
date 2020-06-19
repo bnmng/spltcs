@@ -3,7 +3,7 @@
 <h2>{{ object }}</h2>
 {% endblock %}
 {% block objectmenu %}
-  {% include './_roll_menu.html with thisview='detail' %}
+  {% include './_roll_menu.html' with thisview='detail' %}
 {% endblock %}
 {% block content %}
 	{% include './entity_detail_include.html' %}

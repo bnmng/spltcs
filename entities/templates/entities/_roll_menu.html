@@ -1,4 +1,4 @@
-{% if thisview=="list" %}
+{% if thisview == "list" %}
   <div class="menuitem this">
     List
   </div>
@@ -8,11 +8,10 @@
   </div>
 {% endif %}
 {% if perms.entities.add_roll %}
-  {% if thisview=="create" %}
+  {% if thisview == "create" %}
     <div class="menuitem this">
       Create
     </div>
-  {% endif %}
   {% else %}
     <div class="menuitem">
       <a href="{% url 'roll_create' %}">Create</a>
@@ -20,7 +19,7 @@
   {% endif %}
 {% endif %}
 {% if perms.entities.view_roll %}
-  {% if thisview=="detail" %}
+  {% if thisview == "detail" %}
     <div class="menuitem this">
       Detail
     </div>
@@ -31,7 +30,7 @@
   {% endif %}
 {% endif %}
 {% if perms.entities.change_roll %}
-  {% if thisview=="update" %}
+  {% if thisview == "update" %}
     <div class="menuitem this">
       Update
     </div>
@@ -42,7 +41,7 @@
   {% endif %}
 {% endif %}
 {% if perms.entities.delete_roll %}
-  {% if thisview=="delete" %}
+  {% if thisview == "delete" %}
     <div class="menuitem this">
       Delete
     </div>

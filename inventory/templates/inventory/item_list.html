@@ -1,5 +1,11 @@
 {% extends './_base.html' %}
 {% load static %}
+{% block objectheader %}
+<h2>Items</h2>
+{% endblock %}
+{% block objectmenu %}
+    {% include './_item_menu.html' with thisview='list' %}
+{% endblock %}
 {% block content %}
     <div id="div_recall_query">
         <form id="frm_recall_query">
@@ -104,12 +110,6 @@
     </div>
     {% endif %}
                                 
-    <h2>Items</h2>
-    {% if perms.inventory.add_item %}
-        <div class="actions">
-            <a href="{% url 'item_create' %}">Add</a>
-        </div>
-    {% endif %}
     {% if object_list %}
     <div class="object_list">
         <div class="row">
