@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Entity(models.Model):
     class EntityType(models.IntegerChoices):
         ORGANIZATION=1
@@ -17,7 +18,7 @@ class Entity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, help_text='The user associated with this entity', related_name='entity')
 
     class Meta:
-        ordering=['sort_code', 'full_name']
+        ordering=['entity_type', 'sort_code', 'full_name']
 
     def __str__(self):
         return self.full_name

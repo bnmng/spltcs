@@ -119,7 +119,7 @@ class RecallItemQueryForm(forms.Form):
     recall_item_query = forms.ChoiceField(label='Recall Query', choices=[])
     delete_item_query = forms.BooleanField(label='Delete', required=False)
 
-class ItemCreateForm(ModelForm):
+class ItemForm(ModelForm):
     duplicate = forms.BooleanField(label="Save and Duplicate", initial=False, required=False)
     class Meta:
         model=Item
@@ -145,34 +145,8 @@ class ItemCreateForm(ModelForm):
             'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
         }
 
-class ItemUpdateForm(ModelForm):
-    class Meta:
-        model=Item
-        fields = [
-            'familiar_name',
-            'makemodel',
-            'hostname',
-            'serial_number',
-            'asset_number',
-            'barcode',
-            'home',
-            'location',
-            'condition',
-            'inventory',
-            'keeper',
-            'borrower',
-            'lessor',
-            'notes',
-        ]
-        widgets = {
-            'makemodel': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
-            'location': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
-            'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
-        }
 
-
-
-class MakeModelCreateForm(ModelForm):
+class MakeModelForm(ModelForm):
     duplicate = forms.BooleanField(label="Save and Duplicate", initial=False, required=False)
     class Meta:
         model = MakeModel
@@ -183,17 +157,7 @@ class MakeModelCreateForm(ModelForm):
             'description',
         ]
 
-class MakeModelUpdateForm(ModelForm):
-    class Meta:
-        model = MakeModel
-        fields = [
-            'brand',
-            'name',
-            'part_number',
-            'description',
-        ]
-
-class RoleCreateForm(ModelForm):
+class RoleForm(ModelForm):
     class Meta:
         model = Role
         fields = [
@@ -201,15 +165,7 @@ class RoleCreateForm(ModelForm):
             'description'
         ]
 
-class RoleUpdateForm(ModelForm):
-    class Meta:
-        model = Role
-        fields = [
-            'name',
-            'description'
-        ]
-
-class CategoryCreateForm(ModelForm):
+class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = [
@@ -217,26 +173,7 @@ class CategoryCreateForm(ModelForm):
             'description'
         ]
 
-class CategoryUpdateForm(ModelForm):
-    class Meta:
-        model = Category
-        fields = [
-            'name',
-            'description'
-        ]
-
-
-
-class LocationCreateForm(ModelForm):
-    class Meta:
-        model = Location
-        fields = [
-            'name',
-            'abbreviation',
-            'priority',
-        ]
-
-class LocationUpdateForm(ModelForm):
+class LocationForm(ModelForm):
     class Meta:
         model = Location
         fields = [

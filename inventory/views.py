@@ -1,4 +1,4 @@
-from .forms import (  CategoryCreateForm, CategoryUpdateForm, ItemCreateForm, ItemQueryForm, ItemUpdateForm, Item_ItemXRoleFormset, LocationCreateForm, LocationUpdateForm, MakeModelCreateForm, MakeModelUpdateForm, MakeModel_MakeModelXCategoryFormset, RecallItemQueryForm, RoleCreateForm, RoleUpdateForm, Role_ItemXRoleFormset )
+from .forms import (  CategoryForm, ItemForm, ItemQueryForm, Item_ItemXRoleFormset, LocationForm, MakeModelForm, MakeModel_MakeModelXCategoryFormset, RecallItemQueryForm, RoleForm, Role_ItemXRoleFormset )
 from .models import(ItemQuery, Category, Item, ItemHistory, Location, MakeModel, Role, UserParameters,)
 from datetime import date, timedelta
 from django.contrib.auth import (get_user, get_user_model,)
@@ -165,7 +165,7 @@ class ItemList(PermissionRequiredMixin, ListView):
 class ItemCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'inventory.add_item'
     model = Item
-    form_class=ItemCreateForm
+    form_class=ItemForm
     template_name='inventory/item_create_form.html'
 
     def get_context_data(self, **kwargs):
@@ -183,10 +183,17 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
         response = super().form_valid(form)
         self.object = form.save()
 
-        itemxroles=Role_ItemXRoleFormset(self.request.POST)
+        itemxroles=Item_ItemXRoleFormset(self.request.POST)
         if itemxroles.is_valid():
+            print(inspect.currentframe().f_lineno)
             itemxroles.instance = self.object
             itemxroles.save()
+            print(inspect.currentframe().f_lineno)
+            print(itemxroles)
+        else:
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(itemxroles.errors)
 
         description = 'Created: '
         firstloop=True
@@ -232,7 +239,7 @@ class ItemDetail(PermissionRequiredMixin, DetailView):
 class ItemUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'inventory.change_item'
     model = Item
-    form_class = ItemUpdateForm
+    form_class = ItemForm
     template_name='inventory/item_update_form.html'
 
     def get_context_data(self, **kwargs):
@@ -263,8 +270,9 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print (inspect.currentframe().f_lineno)
-            print ( itemxroles.errors) 
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(itemxroles.errors)
 
         for fieldname in form.changed_data:
             try:
@@ -291,7 +299,7 @@ class ItemDelete(PermissionRequiredMixin, DeleteView):
 class ItemAjaxMakeModel(PermissionRequiredMixin, CreateView):
     permission_required = "inventory.add_makemodel"
     model = MakeModel
-    form_class = MakeModelCreateForm
+    form_class = MakeModelForm
     template_name = "inventory/item_ajax_makemodel.html"
 
     def get_success_url(self):
@@ -300,7 +308,7 @@ class ItemAjaxMakeModel(PermissionRequiredMixin, CreateView):
 class ItemAjaxSuccessMakeModel(PermissionRequiredMixin, UpdateView):
     permission_required = "inventory.add_makemodel"
     model = MakeModel
-    form_class = MakeModelCreateForm
+    form_class = MakeModelForm
     template_name = "inventory/item_ajax_makemodel.html"
 
     def get_context_data(self, **kwargs):
@@ -331,7 +339,7 @@ class ItemAjaxSuccessMakeModel(PermissionRequiredMixin, UpdateView):
 class ItemAjaxRole(PermissionRequiredMixin, CreateView):
     permission_required = "inventory.add_role"
     model = Role
-    form_class = RoleCreateForm
+    form_class = RoleForm
     template_name = "inventory/item_ajax_role.html"
 
     def get_success_url(self):
@@ -340,7 +348,7 @@ class ItemAjaxRole(PermissionRequiredMixin, CreateView):
 class ItemAjaxSuccessRole(PermissionRequiredMixin, UpdateView):
     permission_required = "inventory.add_role"
     model = Role
-    form_class = RoleCreateForm
+    form_class = RoleForm
     template_name = "inventory/item_ajax_role.html"
 
     def get_context_data(self, **kwargs):
@@ -352,7 +360,7 @@ class ItemAjaxSuccessRole(PermissionRequiredMixin, UpdateView):
 class ItemAjaxLocation(PermissionRequiredMixin, CreateView):
     permission_required = "inventory.add_location"
     model = Location
-    form_class = LocationCreateForm
+    form_class = LocationForm
     template_name = "inventory/item_ajax_location.html"
 
     def get_success_url(self):
@@ -361,7 +369,7 @@ class ItemAjaxLocation(PermissionRequiredMixin, CreateView):
 class ItemAjaxSuccessLocation(PermissionRequiredMixin, UpdateView):
     permission_required = "inventory.add_location"
     model = Location
-    form_class = LocationCreateForm
+    form_class = LocationForm
     template_name = "inventory/item_ajax_location.html"
 
     def get_context_data(self, **kwargs):
@@ -395,12 +403,10 @@ class RoleList(PermissionRequiredMixin, ListView):
     permission_required = "inventory.view_role"
     model = Role
 
-
-
 class RoleCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'inventory.add_role'
     model = Role
-    form_class=RoleCreateForm
+    form_class=RoleForm
     template_name='inventory/role_create_form.html'
 
     def get_context_data(self, **kwargs):
@@ -422,6 +428,10 @@ class RoleCreate(PermissionRequiredMixin, CreateView):
         if itemxroles.is_valid():
             itemxroles.instance = self.object
             itemxroles.save()
+        else:
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(itemxroles.errors)
         
         return response
 
@@ -435,7 +445,7 @@ class RoleDetail(PermissionRequiredMixin, DetailView):
 class RoleUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'inventory.change_role'
     model = Role
-    form_class = RoleUpdateForm
+    form_class = RoleForm
     template_name='inventory/role_update_form.html'
 
     def get_context_data(self, **kwargs):
@@ -458,8 +468,9 @@ class RoleUpdate(PermissionRequiredMixin, UpdateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print (inspect.currentframe().f_lineno)
-            print ( itemxroles.errors) 
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(itemxroles.errors)
 
         return response
 
@@ -476,7 +487,7 @@ class RoleDelete(PermissionRequiredMixin, DeleteView):
 class RoleAjaxItems(PermissionRequiredMixin, CreateView):
     permission_required = "inventory.add_item"
     model = Item
-    form_class = ItemCreateForm
+    form_class = ItemForm
     template_name = "inventory/role_ajax_items.html"
 
     def get_success_url(self):
@@ -485,7 +496,7 @@ class RoleAjaxItems(PermissionRequiredMixin, CreateView):
 class RoleAjaxSuccessItems(PermissionRequiredMixin, UpdateView):
     permission_required = "inventory.add_item"
     model = Item
-    form_class = ItemCreateForm
+    form_class = ItemForm
     template_name = "inventory/role_ajax_items.html"
 
     def get_context_data(self, **kwargs):
@@ -500,7 +511,7 @@ class MakeModelList(PermissionRequiredMixin, ListView):
 class MakeModelCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'inventory.add_makemodel'
     model = MakeModel
-    form_class=MakeModelCreateForm
+    form_class=MakeModelForm
     template_name='inventory/makemodel_create_form.html'
 
     def get_context_data(self, **kwargs):
@@ -522,6 +533,10 @@ class MakeModelCreate(PermissionRequiredMixin, CreateView):
         if makemodelxcategories.is_valid():
             makemodelxcategories.instance = self.object
             makemodelxcategories.save()
+        else:
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(makemodelxcategories.errors)
 
         description = 'Created: '
         firstloop=True
@@ -549,7 +564,7 @@ class MakeModelDetail(PermissionRequiredMixin, DetailView):
 class MakeModelUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'inventory.change_makemodel'
     model = MakeModel
-    form_class = MakeModelUpdateForm
+    form_class = MakeModelForm
     template_name='inventory/makemodel_update_form.html'
 
     def get_context_data(self, **kwargs):
@@ -580,8 +595,9 @@ class MakeModelUpdate(PermissionRequiredMixin, UpdateView):
             makemodelxcategories.instance = self.object
             makemodelxcategories.save()
         else:
-            print (inspect.currentframe().f_lineno)
-            print ( makemodelxcategories.errors) 
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print( makemodelxcategories.errors) 
 
         for fieldname in form.changed_data:
             try:
@@ -611,7 +627,7 @@ class CategoryList(PermissionRequiredMixin, ListView):
 class CategoryCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'inventory.add_category'
     model = Category
-    form_class=CategoryCreateForm
+    form_class=CategoryForm
     template_name='inventory/category_create_form.html'
 
     def get_context_data(self, **kwargs):
@@ -633,6 +649,11 @@ class CategoryCreate(PermissionRequiredMixin, CreateView):
         if itemxcategories.is_valid():
             itemxcategories.instance = self.object
             itemxcategories.save()
+        else:
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
+            print(itemxcategories.errors)
+
         
         return response
 
@@ -646,7 +667,7 @@ class CategoryDetail(PermissionRequiredMixin, DetailView):
 class CategoryUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'inventory.change_category'
     model = Category
-    form_class = CategoryUpdateForm
+    form_class = CategoryForm
     template_name='inventory/category_update_form.html'
 
     def get_context_data(self, **kwargs):
@@ -669,7 +690,8 @@ class CategoryUpdate(PermissionRequiredMixin, UpdateView):
             itemxcategories.instance = self.object
             itemxcategories.save()
         else:
-            print (inspect.currentframe().f_lineno)
+            print(inspect.currentframe().f_lineno)
+            print("Form Error")
             print ( itemxcategories.errors) 
 
         return response
@@ -687,7 +709,7 @@ class CategoryDelete(PermissionRequiredMixin, DeleteView):
 class CategoryAjaxMakeModels(PermissionRequiredMixin, CreateView):
     permission_required = "inventory.add_item"
     model = Item
-    form_class = ItemCreateForm
+    form_class = ItemForm
     template_name = "inventory/category_ajax_items.html"
 
     def get_success_url(self):
@@ -696,7 +718,7 @@ class CategoryAjaxMakeModels(PermissionRequiredMixin, CreateView):
 class CategoryAjaxSuccessMakeModels(PermissionRequiredMixin, UpdateView):
     permission_required = "inventory.add_item"
     model = Item
-    form_class = ItemCreateForm
+    form_class = ItemForm
     template_name = "inventory/category_ajax_items.html"
 
     def get_context_data(self, **kwargs):
