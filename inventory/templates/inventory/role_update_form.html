@@ -4,22 +4,7 @@
 <h2>{{ object }}</h2>
 {% endblock %}
 {% block objectmenu %}
-<div class="menuitem">
-	<a href="{% url 'role_list' %}">List</a>
-</div>
-<div class="menuitem">
-	<a href="{% url 'role_detail' object.pk %}">Detail</a>
-</div>
-{% if perms.inventory.change_role %}
-<div class="menuitem">
-	<a href="{% url 'role_update' object.pk %}">Update</a>
-</div>
-{% endif %}
-{% if perms.inventory.delete_role %}
-<div class="menuitem">
-	<a href="{% url 'role_delete' object.pk %}">Delete</a>
-</div>
-{% endif %}
+  {% include './_role_menu.html with thisview='update' %}
 {% endblock %}
 {% block content %}
 {% include './role_form_include.html' %}

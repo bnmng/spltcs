@@ -139,3 +139,13 @@ option.sympTaken {
 button.delete {
   background-color:red;
 }
+
+menuitem.this {
+  font-weight:bold;
+  text-decoration:none;
+}
+
+menuitem.disabled {
+  color:grey;
+}
+

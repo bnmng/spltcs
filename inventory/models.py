@@ -114,7 +114,7 @@ class Item(models.Model):
         return "{} {} SN:{}".format(self.familiar_name, self.makemodel, self.serial_number)
 
     class Meta:
-        ordering = ['makemodel', 'inventory']
+        ordering = ['familiar_name', 'makemodel', 'inventory']
 
 class ItemXRole(models.Model):
     item = models.ForeignKey(Item, verbose_name='item', on_delete=models.SET_NULL, help_text="This role's item", null=True, blank=True, related_name='itemxrole', )

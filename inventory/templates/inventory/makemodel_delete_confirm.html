@@ -4,22 +4,7 @@
 <h2>{{ object }} - Delete</h2>
 {% endblock %}
 {% block objectmenu %}
-<div class="menuitem">
-	<a href="{% url 'makemodel_list' %}">List</a>
-</div>
-<div class="menuitem">
-	<a href="{% url 'makemodel_detail' object.pk %}">Detail</a>
-</div>
-{% if perms.inventory.change_makemodel %}
-<div class="menuitem">
-	<a href="{% url 'makemodel_update' object.pk %}">Update</a>
-</div>
-{% endif %}
-{% if perms.inventory.delete_makemodel %}
-<div class="menuitem">
-	<a href="{% url 'makemodel_delete' object.pk %}">Delete</a>
-</div>
-{% endif %}
+  {% include './_makemodel_menu.html with thisview='delete' %}
 {% endblock %}
 {% block content %}
 

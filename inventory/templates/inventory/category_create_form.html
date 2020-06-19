@@ -4,9 +4,7 @@
 <h2>Create</h2>
 {% endblock %}
 {% block objectmenu %}
-<div class="menuitem">
-	<a href="{% url 'category_list' %}">List</a>
-</div>
+  {% include './_category_menu.html with thisview='create' %}
 {% endblock %}
 {% block content %}
 {% include './category_form_include.html' %}

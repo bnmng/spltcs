@@ -4,22 +4,7 @@
 <h2>{{ object }} - Delete</h2>
 {% endblock %}
 {% block objectmenu %}
-<div class="menuitem">
-	<a href="{% url 'entity_list' %}">List</a>
-</div>
-<div class="menuitem">
-	<a href="{% url 'entity_detail' object.pk %}">Detail</a>
-</div>
-{% if perms.entities.change_entity %}
-<div class="menuitem">
-	<a href="{% url 'entity_update' object.pk %}">Update</a>
-</div>
-{% endif %}
-{% if perms.entities.delete_entity %}
-<div class="menuitem">
-	<a href="{% url 'entity_delete' object.pk %}">Delete</a>
-</div>
-{% endif %}
+  {% include './_entity_menu.html' with thisview='delete' %}
 {% endblock %}
 {% block content %}
 	<form method="post">
