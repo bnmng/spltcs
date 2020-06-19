@@ -143,9 +143,6 @@ class ItemCreateForm(ModelForm):
             'makemodel': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
             'location': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
             'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
-            'keeper': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_keeper', 'data-primaries':'id_keeper', 'data-secondaries':'id_lessor, id_borrower'}),
-            'borrower': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_borrower', 'data-primaries':'id_borrower', 'data-secondaries':'id_lessor, id_keeper'}),
-            'lessor': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_lessor', 'data-primaries':'id_lessor', 'data-secondaries':'id_borrower, id_keeper'}),
         }
 
 class ItemUpdateForm(ModelForm):
@@ -171,9 +168,6 @@ class ItemUpdateForm(ModelForm):
             'makemodel': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
             'location': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
             'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
-            'keeper': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_keeper', 'data-primaries':'id_keeper', 'data-secondaries':'id_lessor, id_borrower'}),
-            'borrower': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_borrower', 'data-primaries':'id_borrower', 'data-secondaries':'id_lessor, id_keeper'}),
-            'lessor': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_entity'), 'data-iframe':'iframe_lessor', 'data-primaries':'id_lessor', 'data-secondaries':'id_borrower, id_keeper'}),
         }
 
 
