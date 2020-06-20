@@ -11,13 +11,13 @@
     {% if object_list %}
     <div class="object_list">
         <div class="row">
-            <div class="cell span1">&nbsp;</div>
+            <div class="cell span1 actions">&nbsp;</div>
             {% include 'spltcs/_list_head.html' with label='Full Name'  span='5' %}
             {% include 'spltcs/_list_head.html' with label='Short Name'  span='2' %}
         </div>
         {% for object in object_list %}
             <div class="row">
-                <div class="cell span1">
+                <div class="cell span1 actions">
                     <div>{% if perms.entities.view_roll %}<a href="{% url 'roll_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
                     <div>{% if perms.entities.change_roll %}<a href="{% url 'roll_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
                 </div>

@@ -7,102 +7,104 @@
     {% include './_item_menu.html' with thisview='list' %}
 {% endblock %}
 {% block content %}
-    <div id="div_recall_query">
-        <form id="frm_recall_query">
-            <div class="fieldWrapper">
-                <div class="queryFieldLabel">
-                    {{ recall_item_query_form.recall_item_query.label_tag }}
-                </div>
-                <div class="queryFieldWidget">
-                    {{ recall_item_query_form.recall_item_query }}
-                </div>
-                <div class="queryFieldOperator">
-                    <button>Recall</button> 
-                </div>
-
-                <div class="queryFieldLabel">
-                    {{ recall_item_query_form.delete_item_query.label_tag }}
-                </div>
-                <div class="queryFieldCheck">
-                    {{ recall_item_query_form.delete_item_query }}
-                </div>
-            </div>
-        </form>
-    </div>
     <div id="div_query">
-        <form id="frm_query">
-            <button type="submit">Submit Query</button>
-            <h2>Filter</h2>
-            <div id="div_filter_fields" class="filter_fields">
+        <div id="div_recall_query">
+            <form id="frm_recall_query">
                 <div class="fieldWrapper">
                     <div class="queryFieldLabel">
-                        <label for="chk_filter_use_clear">Clear All Use Boxes</label>
-                    </div>
-                    <div class="queryFieldCheck">
-                        <input type="checkbox" id="chk_filter_use_clear">
-                    </div>
-                    <div class="queryFieldLabel">
-                        &nbsp;
-                    </div>
-                </div>
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.familiar_name_value  queryfield_use=item_query_form.familiar_name_use queryfield_operator=item_query_form.familiar_name_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.serial_number_value  queryfield_use=item_query_form.serial_number_use queryfield_operator=item_query_form.serial_number_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.makemodel_value  queryfield_use=item_query_form.makemodel_use queryfield_operator=item_query_form.makemodel_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.asset_number_value  queryfield_use=item_query_form.asset_number_use queryfield_operator=item_query_form.asset_number_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.barcode_value  queryfield_use=item_query_form.barcode_use queryfield_operator=item_query_form.barcode_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.hostname_value  queryfield_use=item_query_form.hostname_use queryfield_operator=item_query_form.hostname_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.roles_value  queryfield_use=item_query_form.roles_use queryfield_operator=item_query_form.roles_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.home_value  queryfield_use=item_query_form.home_use queryfield_operator=item_query_form.home_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.location_value  queryfield_use=item_query_form.location_use queryfield_operator=item_query_form.location_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.condition_value  queryfield_use=item_query_form.condition_use queryfield_operator=item_query_form.condition_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.inventory_value  queryfield_use=item_query_form.inventory_use queryfield_operator=item_query_form.inventory_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.keeper_value  queryfield_use=item_query_form.keeper_use queryfield_operator=item_query_form.keeper_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.borrower_value  queryfield_use=item_query_form.borrower_use queryfield_operator=item_query_form.borrower_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.lessor_value  queryfield_use=item_query_form.lessor_use queryfield_operator=item_query_form.lessor_operator %}
-                {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.notes_value  queryfield_use=item_query_form.notes_use queryfield_operator=item_query_form.notes_operator %}
-            </div>
-            <h2>Order</h2>
-            <div id="div_orderby_fields" class="orderby_fields">
-                <div class="queryFieldLabel">
-                    {{ item_query_form.orderby1.label_tag }}
-                </div>
-                <div class="queryFieldWidget">
-                    {{ item_query_form.orderby1 }}
-                </div>
-                <div class="queryFieldWidget">
-                    {{ item_query_form.orderby2 }}
-                </div>
-                <div class="queryFieldWidget">
-                    {{ item_query_form.orderby3 }}
-                </div>
-            </div>
-            <h2>Paginate</h2>
-            <div id="div_paginate" class="paginate_fields">
-                <div class="queryFieldLabel">
-                    {{ item_query_form.paginate_by.label_tag }}
-                </div>
-                <div class="queryFormWidget">
-                    {{ item_query_form.paginate_by }}
-                </div>
-            </div>
-            <div id="div_save_query">
-                <div class="fieldWrapper">
-                    <div class="queryFieldLabel">
-                        {{ item_query_form.do_save.label_tag }}
-                    </div>
-                    <div class="queryFieldCheck">
-                        {{ item_query_form.do_save }}
-                    </div>
-                    <div class="queryFieldLabel">
-                        {{ item_query_form.query_name.label_tag }}
+                        {{ recall_item_query_form.recall_item_query.label_tag }}
                     </div>
                     <div class="queryFieldWidget">
-                        {{ item_query_form.query_name }}
+                        {{ recall_item_query_form.recall_item_query }}
+                    </div>
+                    <div class="queryFieldOperator">
+                        <button>Recall</button> 
+                    </div>
+
+                    <div class="queryFieldLabel">
+                        {{ recall_item_query_form.delete_item_query.label_tag }}
+                    </div>
+                    <div class="queryFieldCheck">
+                        {{ recall_item_query_form.delete_item_query }}
                     </div>
                 </div>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+            </form>
+        </div>
+        <div id="div_query">
+            <form id="frm_query">
+                <button type="submit">Submit Query</button>
+                <h2>Filter</h2>
+                <div id="div_filter_fields" class="filter_fields">
+                    <div class="fieldWrapper">
+                        <div class="queryFieldLabel">
+                            <label for="chk_filter_use_clear">Clear All Use Boxes</label>
+                        </div>
+                        <div class="queryFieldCheck">
+                            <input type="checkbox" id="chk_filter_use_clear">
+                        </div>
+                        <div class="queryFieldLabel">
+                            &nbsp;
+                        </div>
+                    </div>
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.familiar_name_value  queryfield_use=item_query_form.familiar_name_use queryfield_operator=item_query_form.familiar_name_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.serial_number_value  queryfield_use=item_query_form.serial_number_use queryfield_operator=item_query_form.serial_number_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.makemodel_value  queryfield_use=item_query_form.makemodel_use queryfield_operator=item_query_form.makemodel_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.asset_number_value  queryfield_use=item_query_form.asset_number_use queryfield_operator=item_query_form.asset_number_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.barcode_value  queryfield_use=item_query_form.barcode_use queryfield_operator=item_query_form.barcode_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.hostname_value  queryfield_use=item_query_form.hostname_use queryfield_operator=item_query_form.hostname_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.roles_value  queryfield_use=item_query_form.roles_use queryfield_operator=item_query_form.roles_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.home_value  queryfield_use=item_query_form.home_use queryfield_operator=item_query_form.home_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.location_value  queryfield_use=item_query_form.location_use queryfield_operator=item_query_form.location_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.condition_value  queryfield_use=item_query_form.condition_use queryfield_operator=item_query_form.condition_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.inventory_value  queryfield_use=item_query_form.inventory_use queryfield_operator=item_query_form.inventory_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.keeper_value  queryfield_use=item_query_form.keeper_use queryfield_operator=item_query_form.keeper_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.borrower_value  queryfield_use=item_query_form.borrower_use queryfield_operator=item_query_form.borrower_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.lessor_value  queryfield_use=item_query_form.lessor_use queryfield_operator=item_query_form.lessor_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.notes_value  queryfield_use=item_query_form.notes_use queryfield_operator=item_query_form.notes_operator %}
+                </div>
+                <h2>Order</h2>
+                <div id="div_orderby_fields" class="orderby_fields">
+                    <div class="queryFieldLabel">
+                        {{ item_query_form.orderby1.label_tag }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ item_query_form.orderby1 }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ item_query_form.orderby2 }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ item_query_form.orderby3 }}
+                    </div>
+                </div>
+                <h2>Paginate</h2>
+                <div id="div_paginate" class="paginate_fields">
+                    <div class="queryFieldLabel">
+                        {{ item_query_form.paginate_by.label_tag }}
+                    </div>
+                    <div class="queryFormWidget">
+                        {{ item_query_form.paginate_by }}
+                    </div>
+                </div>
+                <div id="div_save_query">
+                    <div class="fieldWrapper">
+                        <div class="queryFieldLabel">
+                            {{ item_query_form.do_save.label_tag }}
+                        </div>
+                        <div class="queryFieldCheck">
+                            {{ item_query_form.do_save }}
+                        </div>
+                        <div class="queryFieldLabel">
+                            {{ item_query_form.query_name.label_tag }}
+                        </div>
+                        <div class="queryFieldWidget">
+                            {{ item_query_form.query_name }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
     {% if filter_display %}
     <div>
@@ -113,7 +115,7 @@
     {% if object_list %}
     <div class="object_list">
         <div class="row">
-            <div class="cell span1">&nbsp;</div>
+            <div class="cell span1 actions">&nbsp;</div>
             {% include 'spltcs/_list_head.html' with label='Name'  span='5' %}
             {% include 'spltcs/_list_head.html' with label='Serial'  span='2' %}
             {% include 'spltcs/_list_head.html' with label='Model'  span='5' %}
@@ -133,7 +135,7 @@
         </div>
         {% for object in object_list %}
             <div class="row">
-                <div class="cell span1">
+                <div class="cell span1 actions">
                     <div>{% if perms.inventory.view_item %}<a href="{% url 'item_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
                     <div>{% if perms.inventory.change_item %}<a href="{% url 'item_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
                 </div>

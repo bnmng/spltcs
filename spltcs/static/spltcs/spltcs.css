@@ -29,6 +29,12 @@ div.menubar {
   width:100%;
   background-color:#494946;
   color:white;
+
+}
+@media only print {
+  div.actions, div.actions *, div.menubar, div.menubar *, #div_query, #div_query *, #div_open_query, #div_open_query * {
+    display:none;
+  }
 }
 
 div.menuitem {

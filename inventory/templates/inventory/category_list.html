@@ -11,13 +11,13 @@
     {% if object_list %}
     <div class="object_list">
         <div class="row">
-            <div class="cell span1">&nbsp;</div>
+            <div class="cell span1 actions">&nbsp;</div>
             {% include 'spltcs/_list_head.html' with label='Name'  span='5' %}
             {% include 'spltcs/_list_head.html' with label='Description'  span='2' %}
         </div>
         {% for object in object_list %}
             <div class="row">
-                <div class="cell span1">
+                <div class="cell span1 actions">
                     <div>{% if perms.inventory.view_category %}<a href="{% url 'role_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
                     <div>{% if perms.inventory.change_category %}<a href="{% url 'role_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
                 </div>

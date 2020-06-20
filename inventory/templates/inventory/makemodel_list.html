@@ -1,6 +1,6 @@
 {% extends './_base.html' %}
 {% load static %}
-{% block object header %}
+{% block objectheader %}
 <h2>Models</h2>
 {% endblock %}
 {% block objectmenu %}
@@ -11,7 +11,7 @@
     {% if object_list %}
     <div class="object_list">
         <div class="row">
-            <div class="cell span1">&nbsp;</div>
+            <div class="cell span1 actions">&nbsp;</div>
             {% include 'spltcs/_list_head.html' with label='Brand'  span='4' %}
             {% include 'spltcs/_list_head.html' with label='Name'  span='4' %}
             {% include 'spltcs/_list_head.html' with label='Part Number'  span='3' %}
@@ -20,7 +20,7 @@
         </div>
         {% for object in object_list %}
             <div class="row">
-                <div class="cell span1">
+                <div class="cell span1 actions">
                     <div>{% if perms.inventory.view_makemodel %}<a href="{% url 'makemodel_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
                     <div>{% if perms.inventory.change_makemodel %}<a href="{% url 'makemodel_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
                 </div>
