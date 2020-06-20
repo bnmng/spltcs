@@ -36,7 +36,7 @@ class ItemList(PermissionRequiredMixin, ListView):
             if 'recall_item_query' in self.request.GET:
                 recall_item_query_form=RecallItemQueryForm(self.request.GET, user=self.request.user)
                 if recall_item_query_form.is_valid():
-                    item_query = LoadQuery.objects.get(pk=int(recall_item_query_form.cleaned_data['recall_item_query']))
+                    item_query = ItemQuery.objects.get(pk=int(recall_item_query_form.cleaned_data['recall_item_query']))
                     for field in item_query._meta.get_fields():
                         if 'ManyRelatedManager' == getattr(item_query, field.name).__class__.__name__:
                             raw_filter_parameters[field.name]=[]
