@@ -4,21 +4,21 @@
   </div>
 {% else %}
   <div class="menuitem">
-    <a href="{% url 'item_list' %}">List</a>
+    <a href="{% url 'ticket_list' %}">List</a>
   </div>
 {% endif %}
-{% if perms.inventory.add_item %}
+{% if perms.trouble.add_ticket %}
   {% if thisview == "create" %}
     <div class="menuitem this">
       Create
     </div>
   {% else %}
     <div class="menuitem">
-      <a href="{% url 'item_create' %}">Create</a>
+      <a href="{% url 'ticket_create' %}">Create</a>
     </div>
   {% endif %}
 {% endif %}
-{% if perms.inventory.view_item %}
+{% if perms.trouble.view_ticket %}
   {% if thisview == "detail" %}
     <div class="menuitem this">
       Detail
@@ -29,11 +29,11 @@
     </div>
   {% else %}
     <div class="menuitem">
-      <a href="{% url 'item_detail' object.pk %}">Detail</a>
+      <a href="{% url 'ticket_detail' object.pk %}">Detail</a>
     </div>
   {% endif %}
 {% endif %}
-{% if perms.inventory.change_item %}
+{% if perms.trouble.change_ticket %}
   {% if thisview == "update" %}
     <div class="menuitem this">
       Update
@@ -44,11 +44,11 @@
     </div>
   {% else %}
     <div class="menuitem">
-      <a href="{% url 'item_update' object.pk %}">Update</a>
+      <a href="{% url 'ticket_update' object.pk %}">Update</a>
     </div>
   {% endif %}
 {% endif %}
-{% if perms.inventory.delete_item %}
+{% if perms.trouble.delete_ticket %}
   {% if thisview == "delete" %}
     <div class="menuitem this">
       Delete
@@ -59,7 +59,7 @@
     </div>
   {% else %}
     <div class="menuitem">
-      <a href="{% url 'item_delete' object.pk %}">Delete</a>
+      <a href="{% url 'ticket_delete' object.pk %}">Delete</a>
     </div>
   {% endif %}
 {% endif %}

@@ -129,10 +129,18 @@ class ItemList(PermissionRequiredMixin, ListView):
         for orderby in ['orderby1','orderby2','orderby3']:
             if orderby in raw_filter_parameters:
                 if '' < raw_filter_parameters[orderby]:
-                    orderby_list.append(raw_filter_parameters[orderby])
+                    if raw_filter_parameters[orderby] in ItemQuery.ORDERBY_CHOICES:
+                        orderby_list.append(raw_filter_parameters[orderby])
 
         if orderby_list:
-            queryset=queryset.order_by(*orderby_list)
+            try:
+                queryset=queryset.order_by(*orderby_list)
+            except Exception as e:
+                print(inspect.currentframe().f_lineno)
+                print("Exception")
+                print(e)
+                for i in sys.exc_info():
+                    print (i)
 
         if 'paginate_by' in raw_filter_parameters:
             self.paginate_by = int(raw_filter_parameters['paginate_by'])

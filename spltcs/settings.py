@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'entities.apps.EntitiesConfig',
     'maintenance.apps.MaintenanceConfig',
+    'trouble.apps.TroubleConfig',
     'varifields.apps.VarifieldsConfig',
 ]
 

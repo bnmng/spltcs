@@ -1,0 +1,22 @@
+{% extends 'trouble/_ajax.html' %}
+{% block content %}
+<form method="POST" id="form">
+{{ form.non_field_errors }}
+{% csrf_token %}
+
+{% include 'spltcs/_form_field.html' with formfield=form.kind %}
+{% include 'spltcs/_form_field.html' with formfield=form.name %}
+{% include 'spltcs/_form_field.html' with formfield=form.part_of %}
+{% include 'spltcs/_form_field.html' with formfield=form.user %}
+
+</form>
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+  if("{{ success }}"){
+    window.parent.updateSelects(window.frameElement, '{{ object.pk }}', '{{ object }}');
+  }
+</script>
+{% endblock %}
+

@@ -1,0 +1,160 @@
+{% extends './_base.html' %}
+{% load static %}
+{% block objectheader %}
+<h2>Items</h2>
+{% endblock %}
+{% block objectmenu %}
+    {% include './_ticket_menu.html' with thisview='list' %}
+{% endblock %}
+{% block content %}
+    <div id="div_query">
+        <div id="div_recall_query">
+            <form id="frm_recall_query">
+                <div class="fieldWrapper">
+                    <div class="queryFieldLabel">
+                        {{ recall_ticket_query_form.recall_ticket_query.label_tag }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ recall_ticket_query_form.recall_ticket_query }}
+                    </div>
+                    <div class="queryFieldOperator">
+                        <button>Recall</button> 
+                    </div>
+
+                    <div class="queryFieldLabel">
+                        {{ recall_ticket_query_form.delete_ticket_query.label_tag }}
+                    </div>
+                    <div class="queryFieldCheck">
+                        {{ recall_ticket_query_form.delete_ticket_query }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="div_query">
+            <form id="frm_query">
+                <button type="submit">Submit Query</button>
+                <h2>Filter</h2>
+                <div id="div_filter_fields" class="filter_fields">
+                    <div class="fieldWrapper">
+                        <div class="queryFieldLabel">
+                            <label for="chk_filter_use_clear">Clear All Use Boxes</label>
+                        </div>
+                        <div class="queryFieldCheck">
+                            <input type="checkbox" id="chk_filter_use_clear">
+                        </div>
+                        <div class="queryFieldLabel">
+                            &nbsp;
+                        </div>
+                    </div>
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=ticket_query_form.submitter  queryfield_use=ticket_query_form.submitter_use queryfield_operator=ticket_query_form.submitter_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=ticket_query_form.item_value  queryfield_use=ticket_query_form.item_use queryfield_operator=ticket_query_form.item_operator %}
+                </div>
+                <h2>Order</h2>
+                <div id="div_orderby_fields" class="orderby_fields">
+                    <div class="queryFieldLabel">
+                        {{ ticket_query_form.orderby1.label_tag }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ ticket_query_form.orderby1 }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ ticket_query_form.orderby2 }}
+                    </div>
+                    <div class="queryFieldWidget">
+                        {{ ticket_query_form.orderby3 }}
+                    </div>
+                </div>
+                <h2>Paginate</h2>
+                <div id="div_paginate" class="paginate_fields">
+                    <div class="queryFieldLabel">
+                        {{ ticket_query_form.paginate_by.label_tag }}
+                    </div>
+                    <div class="queryFormWidget">
+                        {{ ticket_query_form.paginate_by }}
+                    </div>
+                </div>
+                <div id="div_save_query">
+                    <div class="fieldWrapper">
+                        <div class="queryFieldLabel">
+                            {{ ticket_query_form.do_save.label_tag }}
+                        </div>
+                        <div class="queryFieldCheck">
+                            {{ ticket_query_form.do_save }}
+                        </div>
+                        <div class="queryFieldLabel">
+                            {{ ticket_query_form.query_name.label_tag }}
+                        </div>
+                        <div class="queryFieldWidget">
+                            {{ ticket_query_form.query_name }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% if filter_display %}
+    <div>
+        Filtered: {{ filter_display }}
+    </div>
+    {% endif %}
+                                
+    {% if object_list %}
+    <div class="object_list">
+        <div class="row">
+            <div class="cell span1 actions">&nbsp;</div>
+            {% include 'spltcs/_list_head.html' with label='Name'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Serial'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Model'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Asset'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Barcode'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Hostname'  span='5' %}
+            {% include 'spltcs/_list_head.html' with label='Roles'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Home'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Location'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Condition'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Status'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Keeper'  span='2' %}
+            {% include 'spltcs/_list_head.html' with label='Lessor'  span='2' %}
+            {% for fieldname in additional_field_names %}
+                {% include 'spltcs/_list_head.html' with label=fieldname  span='2' %}
+            {% endfor %}
+        </div>
+        {% for object in object_list %}
+            <div class="row">
+                <div class="cell span1 actions">
+                    <div>{% if perms.trouble.view_ticket %}<a href="{% url 'ticket_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
+                    <div>{% if perms.trouble.change_ticket %}<a href="{% url 'ticket_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
+                </div>
+                {% include 'spltcs/_list_field.html' with column=object.familiar_name  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.serial_number  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.makemodel  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.asset_number  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.barcode  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.hostname  span='5' %}
+                {% include 'spltcs/_list_many_field.html' with column=object.roles span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.home.abbreviation  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.location.abbreviation  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.condition  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.status  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.keeper  span='2' %}
+                {% include 'spltcs/_list_field.html' with column=object.lessor  span='2' %}
+                {% for field in additional_fields %}
+                    {% include 'spltcs/_list_field.html' with column=field  span='2' %}
+                {% endfor %}
+                
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'spltcs/queryform.js' %}"></script>
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% comment %}
+vim: ai et sts=4 ts=4 sw=4
+{% endcomment %}

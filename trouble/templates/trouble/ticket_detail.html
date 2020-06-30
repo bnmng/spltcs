@@ -1,0 +1,10 @@
+{% extends './_base.html' %}
+{% block objectheader %}
+<h2>{{ object }}</h2>
+{% endblock %}
+{% block objectmenu %}
+  {% include './_ticket_menu.html' with thisview='detail' %}
+{% endblock %}
+{% block content %}
+	{% include './ticket_detail_include.html' %}
+{% endblock %}
