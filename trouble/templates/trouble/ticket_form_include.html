@@ -19,32 +19,33 @@
 
 		{{ form.media }}
 		{% csrf_token %}
-    {% include 'spltcs/_form_field.html' with formfield=form.familiar_name %}
-    {% include 'spltcs/_form_field.html' with formfield=form.makemodel %}
-    {{ ticketxroles.management_form }}
-    {% for subform in ticketxroles.forms %}
+
+    {% include 'spltcs/_form_field.html' with formfield=form.item %}
+    {% include 'spltcs/_form_field.html' with formfield=form.submitter %}
+    {% include 'spltcs/_form_field.html' with formfield=form.description %}
+    {% include 'spltcs/_form_field.html' with formfield=form.impact %}
+    {% include 'spltcs/_form_field.html' with formfield=form.date_reported %}
+    <hr>
+    <h2>Updates</h2>
+    {{ ticketresponses.management_form }}
+    {% for subform in ticketresponses.forms %}
       {% for hidden in subform.hidden_fields %}
         {{ hidden }}
       {% endfor %}
-      {% include 'spltcs/_form_field.html' with formfield=subform.role delete=subform.DELETE %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.notes %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.status %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.date_updated delete=subform.DELETE %}
     {% endfor %}
-    <div style="display:none;" id="id_ticketxrole-template">
-      {% for hidden in ticketxroles.empty_form.hidden_fields %}
+    <div style="display:none;" id="id_ticketresponse-template">
+      {% with ticketresponses.empty_form as subform %}
+      {% for hidden in subform.hidden_fields %}
         {{ hidden }}
       {% endfor %}
-      {% include 'spltcs/_form_field.html' with formfield=ticketxroles.empty_form.role delete=ticketxroles.empty_form.DELETE %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.notes %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.status %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.date_updated delete=subform.DELETE %}
+      {% endwith %}
     </div>
-    <div class="formFieldWrapper">
-      <div class="formFieldLabel">Attach Another Role</div>
-      <div class="formFieldWidget">
-        <button id="btn_addItemXRolesForm">Add</button>
-      </div>
-    </div>
-
-    {% include 'spltcs/_form_field.html' with formfield=form.submitter %}
-    {% include 'spltcs/_form_field.html' with formfield=form.item %}
-    {% include 'spltcs/_form_field.html' with formfield=form.description %}
-    {% include 'spltcs/_form_field.html' with formfield=form.date_reported %}
     <div class="formFieldWrapper">
       <div class="formFieldLabel">
       </div>
@@ -55,12 +56,11 @@
 	</form>
 <script src="{% static 'spltcs/addformsetform.js' %}"></script>
 <script src="{% static 'spltcs/sympselect.js' %}"></script>
-  <script type='text/javascript'>
-    sympSelectInit(document.getElementById("form"), /.*role/); 
-document.getElementById('btn_addItemXRolesForm').addEventListener('click', function(e) {
-	e.preventDefault();
-	addformsetform("id_ticketxrole");
-});
-  </script>
+<script type='text/javascript'>
+  document.getElementById('btn_addTicketResponsesForm').addEventListener('click', function(e) {
+    e.preventDefault();
+    addformsetform("id_ticketresponse");
+  });
+</script>
 
 

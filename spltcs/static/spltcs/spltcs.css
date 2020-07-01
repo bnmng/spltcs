@@ -87,7 +87,7 @@ div.span6 {
 div.formFieldWrapper {
   display:grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows:repeat(2, 1fr);
+/*  grid-template-rows:repeat(2, 1em); */
   margin-bottom:1em;
 }
 
@@ -114,7 +114,7 @@ div.formFieldHelp {
 div.detailFieldWrapper {
   display:grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows:repeat(2, 1fr);
+/*  grid-template-rows:repeat(2, 1fr); */
   margin-bottom:.5em;
 }
 

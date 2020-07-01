@@ -14,8 +14,8 @@ class Ticket(models.Model):
     )
 
 
-    submitter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, help_text='The user who submitted this ticket', related_name='submitted_ticket')
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True, help_text='The item associated with this ticket', related_name='ticket')
+    submitter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, help_text='The user who submitted this ticket', related_name='submitted_ticket')
     description = models.TextField('description', help_text='Any notes for this item', blank=True)
     impact = models.IntegerField('impact', choices=IMPACT_CHOICES, default=1, help_text='The impact is this trouble having on operations?')
     date_reported = models.DateField('date', auto_now_add=True, help_text='The date this ticket was submitted')

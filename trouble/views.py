@@ -1,4 +1,4 @@
-from .forms import TicketForm, RecallTicketQueryForm, TicketQueryForm
+from .forms import TicketForm, RecallTicketQueryForm, TicketQueryForm, Ticket_TicketResponseFormset
 from .models import Ticket, TicketResponse, TicketQuery
 from datetime import date, timedelta
 from django.contrib.auth import (get_user, get_user_model,)
@@ -185,7 +185,7 @@ class TicketCreate(PermissionRequiredMixin, CreateView):
         else:
             ticketresponses = Ticket_TicketResponseFormset()
 
-        context_data['ticketxroles']=ticketresponses
+        context_data['ticketresponses']=ticketresponses
 
         return context_data
 

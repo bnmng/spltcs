@@ -71,11 +71,11 @@
 	</form>
 <script src="{% static 'spltcs/addformsetform.js' %}"></script>
 <script src="{% static 'spltcs/sympselect.js' %}"></script>
-  <script type='text/javascript'>
+<script type='text/javascript'>
     sympSelectInit(document.getElementById("form"), /.*roll/); 
-document.getElementById('btn_addEntityXRollsForm').addEventListener('click', function(e) {
-	e.preventDefault();
-	addformsetform("id_entityxroll");
+    document.getElementById('btn_addEntityXRollsForm').addEventListener('click', function(e) {
+	  e.preventDefault();
+	  addformsetform("id_entityxroll");
 });
   </script>
 
