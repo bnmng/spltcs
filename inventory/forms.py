@@ -93,6 +93,14 @@ class ItemQueryForm(ModelForm):
             'notes_use',
             'notes_operator',
 
+            'inventoried_1_value',
+            'inventoried_1_use',
+            'inventoried_1_operator',
+
+            'inventoried_2_value',
+            'inventoried_2_use',
+            'inventoried_2_operator',
+
             'orderby1',
             'orderby2',
             'orderby3',
@@ -138,6 +146,7 @@ class ItemForm(ModelForm):
             'borrower',
             'lessor',
             'notes',
+            'inventoried',
         ]
         widgets = {
             'makemodel': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),

@@ -106,6 +106,7 @@ class Item(models.Model):
     borrower = models.ForeignKey( Entity, verbose_name='borrower', on_delete=models.SET_NULL, help_text='The person or organization who is currently using or taken responsible for the item', null=True, blank=True, related_name='borrowed_item', )
     lessor = models.ForeignKey( Entity, verbose_name='lessor', on_delete=models.SET_NULL, help_text='The owner or organization from which this item is leased or borrowed', null=True, blank=True, related_name='posession', )
     notes = models.TextField('notes', help_text='Any notes for this item', blank=True)
+    inventoried = models.DateField('date confirmed', default=datetime.now, null=True, blank=True, help_text='When this item\'s inventory data was last confirmed');
 
     def roles(self):
         return self.itemxrole.all().values_list('role__name', flat=True)
@@ -196,6 +197,14 @@ class ItemQuery(models.Model):
     lessor_use = models.BooleanField('use lessor', default=False)
     lessor_operator = models.CharField('lessor operator', max_length=50, default='lessor__icontains', choices=(('lessor__iexact', 'equals'),('lessor__icontains', 'contains')) )
 
+    inventoried_1_value = models.DateField('date confirmed', help_text='Date inventory data last confirmed', null=True, blank=True)
+    inventoried_1_use = models.BooleanField('use date confirmed', default=False)
+    inventoried_1_operator = models.CharField('date confirmed operator', max_length=50, default='inventoried__gte', choices=(('inventoried__gte', 'on or after'),) )
+
+    inventoried_2_value = models.DateField('date confirmed', help_text='Date inventory data last confirmed', null=True, blank=True)
+    inventoried_2_use = models.BooleanField('use date confirmed', default=False)
+    inventoried_2_operator = models.CharField('date confirmed operator', max_length=50, default='inventoried__lte', choices=(('inventoried__lte', 'on or before'),) )
+
     notes_value = models.CharField('notes', max_length=100, help_text='Any notes for this item', blank=True)
     notes_use = models.BooleanField('use notes', default=False)
     notes_operator = models.CharField('notes operator', max_length=50, default='notes__icontains', choices=(('notes__iexact', 'equals'),('notes__icontains', 'contains')) )
@@ -229,6 +238,8 @@ class ItemQuery(models.Model):
         ('-borrower', 'Borrower DESC'),
         ('lessor', 'Lessor'),
         ('-lessor', 'Lessor DESC'),
+        ('inventoried', 'Date Inventoried'),
+        ('-inventoried', 'Date Iventoried DESC'),
     ]
     orderby1 = models.CharField('order by',  max_length=20, choices=ORDERBY_CHOICES, default='makemodel')
     orderby2 = models.CharField('order by',  max_length=20, choices=ORDERBY_CHOICES, default='inventory')

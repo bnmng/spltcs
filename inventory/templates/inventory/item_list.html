@@ -60,6 +60,8 @@
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.keeper_value  queryfield_use=item_query_form.keeper_use queryfield_operator=item_query_form.keeper_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.borrower_value  queryfield_use=item_query_form.borrower_use queryfield_operator=item_query_form.borrower_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.lessor_value  queryfield_use=item_query_form.lessor_use queryfield_operator=item_query_form.lessor_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.inventoried_1_value  queryfield_use=item_query_form.inventoried_1_use queryfield_operator=item_query_form.inventoried_1_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.inventoried_2_value  queryfield_use=item_query_form.inventoried_2_use queryfield_operator=item_query_form.inventoried_2_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.notes_value  queryfield_use=item_query_form.notes_use queryfield_operator=item_query_form.notes_operator %}
                 </div>
                 <h2>Order</h2>
@@ -129,9 +131,7 @@
             {% include 'spltcs/_list_head.html' with label='Status'  span='2' %}
             {% include 'spltcs/_list_head.html' with label='Keeper'  span='2' %}
             {% include 'spltcs/_list_head.html' with label='Lessor'  span='2' %}
-            {% for fieldname in additional_field_names %}
-                {% include 'spltcs/_list_head.html' with label=fieldname  span='2' %}
-            {% endfor %}
+            {% include 'spltcs/_list_head.html' with label='Inventoried'  span='2' %}
         </div>
         {% for object in object_list %}
             <div class="row">
@@ -152,9 +152,7 @@
                 {% include 'spltcs/_list_field.html' with column=object.status  span='2' %}
                 {% include 'spltcs/_list_field.html' with column=object.keeper  span='2' %}
                 {% include 'spltcs/_list_field.html' with column=object.lessor  span='2' %}
-                {% for field in additional_fields %}
-                    {% include 'spltcs/_list_field.html' with column=field  span='2' %}
-                {% endfor %}
+                {% include 'spltcs/_list_field.html' with column=object.inventoried  span='2' %}
                 
             </div>
         {% endfor %}
