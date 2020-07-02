@@ -231,16 +231,13 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
                     itemxrole.item_id=self.object.pk
                     itemxrole.save()
 
-                return redirect( reverse_lazy('item_update', kwargs={'pk': self.object.id }))
+                return redirect( reverse_lazy('item_detail', kwargs={'pk': self.object.id }))
 
         
         return response
 
     def get_success_url(self):
-        print(inspect.currentframe().f_lineno)
-        print("pk=")
-        print(self.object.pk)
-        return reverse_lazy('item_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('item_detail', kwargs={'pk': self.object.id})
 
 class ItemDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'inventory.view_item'
@@ -307,7 +304,7 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
                     itemxrole.item_id=self.object.pk
                     itemxrole.save()
                 
-                return redirect( reverse_lazy('item_update', kwargs={'pk': self.object.id }))
+                return redirect( reverse_lazy('item_detail', kwargs={'pk': self.object.id }))
 
         return response
 
@@ -462,7 +459,7 @@ class RoleCreate(PermissionRequiredMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy('role_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('role_detail', kwargs={'pk': self.object.id})
 
 class RoleDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'inventory.view_role'
@@ -581,7 +578,7 @@ class MakeModelCreate(PermissionRequiredMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy('makemodel_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('makemodel_detail', kwargs={'pk': self.object.id})
 
 class MakeModelDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'inventory.view_makemodel'
@@ -684,7 +681,7 @@ class CategoryCreate(PermissionRequiredMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy('category_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('category_detail', kwargs={'pk': self.object.id})
 
 class CategoryDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'inventory.view_category'

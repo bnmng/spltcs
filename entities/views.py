@@ -50,10 +50,7 @@ class EntityCreate(PermissionRequiredMixin, CreateView):
         return response
 
     def get_success_url(self):
-        print(inspect.currentframe().f_lineno)
-        print("pk=")
-        print(self.object.pk)
-        return reverse_lazy('entity_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('entity_detail', kwargs={'pk': self.object.id})
 
 class EntityDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'entities.view_entity'
@@ -161,7 +158,7 @@ class RollCreate(PermissionRequiredMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy('roll_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('roll_detail', kwargs={'pk': self.object.id})
 
 class RollDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'entities.view_roll'

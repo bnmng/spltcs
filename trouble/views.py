@@ -233,16 +233,13 @@ class TicketCreate(PermissionRequiredMixin, CreateView):
                     ticketxrole.ticket_id=self.object.pk
                     ticketxrole.save()
 
-                return redirect( reverse_lazy('ticket_update', kwargs={'pk': self.object.id }))
+                return redirect( reverse_lazy('ticket_detail', kwargs={'pk': self.object.id }))
 
         
         return response
 
     def get_success_url(self):
-        print(inspect.currentframe().f_lineno)
-        print("pk=")
-        print(self.object.pk)
-        return reverse_lazy('ticket_update', kwargs={'pk': self.object.id})
+        return reverse_lazy('ticket_detail', kwargs={'pk': self.object.id})
 
 class TicketDetail(PermissionRequiredMixin, DetailView):
     permission_required = 'trouble.view_ticket'
@@ -309,7 +306,7 @@ class TicketUpdate(PermissionRequiredMixin, UpdateView):
                     ticketxrole.ticket_id=self.object.pk
                     ticketxrole.save()
                 
-                return redirect( reverse_lazy('ticket_update', kwargs={'pk': self.object.id }))
+                return redirect( reverse_lazy('ticket_detail', kwargs={'pk': self.object.id }))
 
         return response
 
