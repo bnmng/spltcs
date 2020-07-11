@@ -105,6 +105,9 @@ class ItemList(PermissionRequiredMixin, ListView):
                     else:
                         filter_parameters[raw_filter_parameters[barekey+'_operator']]=raw_filter_parameters[barekey+'_value']
 
+        print(inspect.currentframe().f_lineno)
+        print("filter_parameters")
+        print(filter_parameters)
         try:
             queryset=queryset.filter(**filter_parameters)
         except Exception as e:
@@ -193,11 +196,8 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
 
         itemxroles=Item_ItemXRoleFormset(self.request.POST)
         if itemxroles.is_valid():
-            print(inspect.currentframe().f_lineno)
             itemxroles.instance = self.object
             itemxroles.save()
-            print(inspect.currentframe().f_lineno)
-            print(itemxroles)
         else:
             print(inspect.currentframe().f_lineno)
             print("Form Error")
@@ -597,11 +597,6 @@ class MakeModelUpdate(PermissionRequiredMixin, UpdateView):
             makemodelxcategories = MakeModel_MakeModelXCategoryFormset(self.request.POST, instance=self.object)
         else:
             makemodelxcategories = MakeModel_MakeModelXCategoryFormset(instance=self.object)
-
-        print(inspect.currentframe().f_lineno)
-        print(makemodelxcategories)
-        print(inspect.currentframe().f_lineno)
-        print(makemodelxcategories.empty_form)
 
         context_data['makemodelxcategories']=makemodelxcategories
 

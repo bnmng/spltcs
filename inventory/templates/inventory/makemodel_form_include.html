@@ -28,7 +28,7 @@
       {% for hidden in subform.hidden_fields %}
         {{ hidden }}
       {% endfor %}
-      {% include 'spltcs/_form_field.html' with formfield=subform.role delete=subform.DELETE %}
+      {% include 'spltcs/_form_field.html' with formfield=subform.category delete=subform.DELETE %}
     {% endfor %}
     <div style="display:none;" id="id_makemodelxcategory-template">
       {% for hidden in makemodelxcategories.empty_form.hidden_fields %}
@@ -37,7 +37,7 @@
       {% include 'spltcs/_form_field.html' with formfield=makemodelxcategories.empty_form.role delete=makemodelxcategories.empty_form.DELETE %}
     </div>
     <div class="formFieldWrapper">
-      <div class="formFieldLabel">Attach Another Role</div>
+      <div class="formFieldLabel">Attach Another Category</div>
       <div class="formFieldWidget">
         <button id="btn_addMakeModelXCategorysForm">Add</button>
       </div>

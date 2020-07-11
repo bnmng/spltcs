@@ -41,6 +41,10 @@ class ItemQueryForm(ModelForm):
             'serial_number_use',
             'serial_number_operator',
 
+            'makemodel_value',
+            'makemodel_use',
+            'makemodel_operator',
+
             'makemodel_category_value',
             'makemodel_category_use',
             'makemodel_category_operator',
