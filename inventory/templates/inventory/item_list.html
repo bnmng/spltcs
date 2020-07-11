@@ -48,7 +48,8 @@
                     </div>
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.familiar_name_value  queryfield_use=item_query_form.familiar_name_use queryfield_operator=item_query_form.familiar_name_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.serial_number_value  queryfield_use=item_query_form.serial_number_use queryfield_operator=item_query_form.serial_number_operator %}
-                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.makemodel_value  queryfield_use=item_query_form.makemodel_use queryfield_operator=item_query_form.makemodel_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.makemodel_category_value  queryfield_use=item_query_form.makemodel_category_use queryfield_operator=item_query_form.makemodel_category_operator %}
+                    {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.makemodel_brand_value  queryfield_use=item_query_form.makemodel_brand_use queryfield_operator=item_query_form.makemodel_brand_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.asset_number_value  queryfield_use=item_query_form.asset_number_use queryfield_operator=item_query_form.asset_number_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.barcode_value  queryfield_use=item_query_form.barcode_use queryfield_operator=item_query_form.barcode_operator %}
                     {% include 'spltcs/_filter_field.html' with queryfield_value=item_query_form.hostname_value  queryfield_use=item_query_form.hostname_use queryfield_operator=item_query_form.hostname_operator %}

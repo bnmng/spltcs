@@ -149,9 +149,13 @@ class ItemQuery(models.Model):
     serial_number_use = models.BooleanField( 'use serial number', default=False)
     serial_number_operator = models.CharField('serial_number operator', max_length=50, default='serial_number__icontains', choices=(('serial_number__iexact', 'equals'),('serial_number__icontains', 'contains')) )
 
-    makemodel_value = models.ForeignKey( MakeModel, verbose_name='model', on_delete=models.SET_NULL, help_text="The item's model", null=True, blank=True, related_name='item_query', )
-    makemodel_use = models.BooleanField( 'use model', default=False )
-    makemodel_operator = models.CharField('makemodel operator', max_length=50, default='makemodel__icontains', choices=(('makemodel__iexact', 'equals'),('makemodel__icontains', 'contains')) )
+    makemodel_category_value = models.ForeignKey( Category, verbose_name='category', on_delete=models.SET_NULL, help_text="The item's model's category", null=True, blank=True, related_name='item_query_category', )
+    makemodel_category_use = models.BooleanField( 'use category', default=False )
+    makemodel_category_operator = models.CharField('category operator', max_length=50, default='makemodel__category__in', choices=(('makemodel__category__in', 'equals'),) )
+
+    makemodel_brand_value = models.CharField('brand', max_length=50,  help_text="The item's brand", null=True, blank=True )
+    makemodel_brand_use = models.BooleanField( 'use brand', default=False )
+    makemodel_brand_operator = models.CharField('makemodel operator', max_length=50, default='makemodel__brand__icontains', choices=(('makemodel__brand__iexact', 'equals'),('makemodel__brand__icontains', 'contains')) )
 
     asset_number_value = models.CharField( 'asset number', max_length=30, help_text="The item's asset number", blank=True )
     asset_number_use = models.BooleanField('use asset number', default=False)
