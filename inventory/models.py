@@ -286,13 +286,25 @@ class ItemQuery(models.Model):
         display_string=''
         for fieldname in fieldnames:
 
-
             if getattr(self, fieldname + '_use'):
 
                 if display_string > '':
                     display_string =display_string + ', '
+                
+                field = self._meta.get_field(fieldname + '_value')
+                print(inspect.currentframe().f_lineno)
+                print(type(field).__name__)
+                if type(field).__name__=="ManyToManyField":
+                    valuestring=''
+                    for value in getattr(self, fieldname + '_value').all():
+                        if valuestring > '':
+                            valuestring = valuestring + ', '
 
-                display_string = display_string + ' {} {} {}'.format( self._meta.get_field(fieldname + '_value').verbose_name, getattr(self, 'get_' + fieldname + '_operator_display' )(), getattr(self, fieldname + '_value') )
+                        valuestring = valuestring = valuestring + str(value)
+                else:
+                    valuestring = getattr(self, fieldname + '_value')
+
+                display_string = display_string + ' {} {} {}'.format( field.verbose_name, getattr(self, 'get_' + fieldname + '_operator_display' )(), valuestring )
 
         return display_string
 

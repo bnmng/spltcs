@@ -52,7 +52,7 @@ class ItemList(PermissionRequiredMixin, ListView):
                         item_query.save()
                     have_query=True
                 else:
-                    print(inspect.currentframe().f_lineno)
+                    print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
                     print("Form Error")
                     print(recall_load_query_form.errors)
                     
@@ -78,17 +78,23 @@ class ItemList(PermissionRequiredMixin, ListView):
                     item_query_form.save()
                     have_query=True
                 else:
-                    print(inspect.currentframe().f_lineno)
+                    print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
                     print("Form Error")
                     print(item_query_form.errors)
 
 
         if not have_query:
+            print('{} {}'.format('{} {}'.format(inspect.currentframe().f_lineno, __file__), __file__) )
             item_query_queryset = ItemQuery.objects.all() 
             if item_query_queryset.exists():
                 item_query = item_query_queryset[0]
                 for field in item_query._meta.get_fields():
-                    raw_filter_parameters[field.name]=getattr(item_query, field.name)
+                    if 'ManyRelatedManager' == getattr(item_query, field.name).__class__.__name__:
+                        raw_filter_parameters[field.name]=[]
+                        for obj in getattr(item_query, field.name).all():
+                            raw_filter_parameters[field.name].append(obj)
+                    else:
+                        raw_filter_parameters[field.name]=getattr(item_query, field.name)
 
         if 'quick_search_use' in raw_filter_parameters:
             if True == raw_filter_parameters['quick_search_use']:
@@ -103,19 +109,22 @@ class ItemList(PermissionRequiredMixin, ListView):
                     barekey = paramkey[:-4:]
                     if 'exclude__' == raw_filter_parameters[barekey+'_operator'][:9]:
                         exclude_parameters[raw_filter_parameters[barekey+'_operator'][9:]]=raw_filter_parameters[barekey+'_value']
+                        filter_display.append('not {} {}'.format(raw_filter_parameters[barekey+'_operator'],raw_filter_parameters[barekey+'_value']))
                     else:
+                        print('{} {}'.format('{} {}'.format(inspect.currentframe().f_lineno, __file__), __file__))
+                        print(raw_filter_parameters[barekey+'_value'])
+                        print(type(raw_filter_parameters[barekey+'_value']).__name__)
                         filter_parameters[raw_filter_parameters[barekey+'_operator']]=raw_filter_parameters[barekey+'_value']
                         filter_display.append('{} {}'.format(raw_filter_parameters[barekey+'_operator'],raw_filter_parameters[barekey+'_value']))
 
-        print(inspect.currentframe().f_lineno)
+        print('{} {}'.format('{} {}'.format(inspect.currentframe().f_lineno, __file__), __file__) )
         print("filter_parameters")
         print(filter_parameters)
-        print(str(filter_parameters).replace('__icontains', ' contains'))
 
         try:
             queryset=queryset.filter(**filter_parameters)
         except Exception as e:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Exception")
             print(e)
             for i in sys.exc_info():
@@ -125,7 +134,7 @@ class ItemList(PermissionRequiredMixin, ListView):
             for paramkey, parameter in exclude_parameters.items():
                 queryset = queryset.exclude(**{paramkey: parameter})
         except Exception as e:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Exception")
             print(e)
             for i in sys.exc_info():
@@ -143,7 +152,7 @@ class ItemList(PermissionRequiredMixin, ListView):
             try:
                 queryset=queryset.order_by(*orderby_list)
             except Exception as e:
-                print(inspect.currentframe().f_lineno)
+                print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
                 print("Exception")
                 print(e)
                 for i in sys.exc_info():
@@ -162,7 +171,7 @@ class ItemList(PermissionRequiredMixin, ListView):
             item_query = ItemQuery.objects.all()[0]
         except Exception as e:
 
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Exception")
             print(e)
             for i in sys.exc_info():
@@ -203,7 +212,7 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(itemxroles.errors)
 
@@ -230,7 +239,7 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
                 
                 itemxroles = ItemXRole.objects.filter(item_id=oldpk);
                 for itemxrole in itemxroles:
-                    print ( inspect.currentframe().f_lineno )
+                    print ( '{} {}'.format(inspect.currentframe().f_lineno, __file__) )
                     itemxrole.pk=None
                     itemxrole.item_id=self.object.pk
                     itemxrole.save()
@@ -261,9 +270,9 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
         else:
             itemxroles = Item_ItemXRoleFormset(instance=self.object)
 
-        print(inspect.currentframe().f_lineno)
+        print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
         print(itemxroles)
-        print(inspect.currentframe().f_lineno)
+        print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
         print(itemxroles.empty_form)
 
         context_data['itemxroles']=itemxroles
@@ -281,7 +290,7 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(itemxroles.errors)
 
@@ -303,7 +312,7 @@ class ItemUpdate(PermissionRequiredMixin, UpdateView):
 
                 itemxroles = ItemXRole.objects.filter(item_id=oldpk);
                 for itemxrole in itemxroles:
-                    print ( inspect.currentframe().f_lineno )
+                    print ( '{} {}'.format(inspect.currentframe().f_lineno, __file__) )
                     itemxrole.pk=None
                     itemxrole.item_id=self.object.pk
                     itemxrole.save()
@@ -456,7 +465,7 @@ class RoleCreate(PermissionRequiredMixin, CreateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(itemxroles.errors)
         
@@ -495,7 +504,7 @@ class RoleUpdate(PermissionRequiredMixin, UpdateView):
             itemxroles.instance = self.object
             itemxroles.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(itemxroles.errors)
 
@@ -561,7 +570,7 @@ class MakeModelCreate(PermissionRequiredMixin, CreateView):
             makemodelxcategories.instance = self.object
             makemodelxcategories.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(makemodelxcategories.errors)
 
@@ -617,7 +626,7 @@ class MakeModelUpdate(PermissionRequiredMixin, UpdateView):
             makemodelxcategories.instance = self.object
             makemodelxcategories.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print( makemodelxcategories.errors) 
 
@@ -672,7 +681,7 @@ class CategoryCreate(PermissionRequiredMixin, CreateView):
             itemxcategories.instance = self.object
             itemxcategories.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print(itemxcategories.errors)
 
@@ -712,7 +721,7 @@ class CategoryUpdate(PermissionRequiredMixin, UpdateView):
             itemxcategories.instance = self.object
             itemxcategories.save()
         else:
-            print(inspect.currentframe().f_lineno)
+            print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
             print("Form Error")
             print ( itemxcategories.errors) 
 
