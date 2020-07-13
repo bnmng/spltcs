@@ -107,7 +107,11 @@ class ItemList(PermissionRequiredMixin, ListView):
             if '_use' == paramkey[-4:]:
                 if True == parameter:
                     barekey = paramkey[:-4:]
+                    print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
+                    print(raw_filter_parameters[barekey+'_operator'][:9])
                     if 'exclude__' == raw_filter_parameters[barekey+'_operator'][:9]:
+                        print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
+                        print(raw_filter_parameters[barekey+'_operator'][9:])
                         exclude_parameters[raw_filter_parameters[barekey+'_operator'][9:]]=raw_filter_parameters[barekey+'_value']
                         filter_display.append('not {} {}'.format(raw_filter_parameters[barekey+'_operator'],raw_filter_parameters[barekey+'_value']))
                     else:
