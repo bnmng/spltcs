@@ -32,6 +32,7 @@ class ItemList(PermissionRequiredMixin, ListView):
         filter_parameters={}
         exclude_parameters={}
         raw_filter_parameters={}
+        filter_display=[]
         if self.request.GET:
             if 'recall_item_query' in self.request.GET:
                 recall_item_query_form=RecallItemQueryForm(self.request.GET, user=self.request.user)
@@ -104,10 +105,13 @@ class ItemList(PermissionRequiredMixin, ListView):
                         exclude_parameters[raw_filter_parameters[barekey+'_operator'][9:]]=raw_filter_parameters[barekey+'_value']
                     else:
                         filter_parameters[raw_filter_parameters[barekey+'_operator']]=raw_filter_parameters[barekey+'_value']
+                        filter_display.append('{} {}'.format(raw_filter_parameters[barekey+'_operator'],raw_filter_parameters[barekey+'_value']))
 
         print(inspect.currentframe().f_lineno)
         print("filter_parameters")
         print(filter_parameters)
+        print(str(filter_parameters).replace('__icontains', ' contains'))
+
         try:
             queryset=queryset.filter(**filter_parameters)
         except Exception as e:
@@ -165,7 +169,7 @@ class ItemList(PermissionRequiredMixin, ListView):
                 print (i)
 
             item_query = ItemQuery.objects.create(user=self.request.user, query_name='')
-
+        context_data['item_query'] = item_query
         context_data['item_query_form'] = ItemQueryForm(instance=item_query)
 
         context_data['recall_item_query_form'] = RecallItemQueryForm(initial={'recall_item_query':item_query}, user=self.request.user)

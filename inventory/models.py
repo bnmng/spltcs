@@ -1,4 +1,5 @@
 from datetime import date, datetime
+import inspect
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -258,6 +259,42 @@ class ItemQuery(models.Model):
     orderby3 = models.CharField('order by',  max_length=20, choices=ORDERBY_CHOICES, default='condition')
 
     paginate_by = models.IntegerField('paginate by', default=10)
+
+    def query_display(self):
+        fieldnames=[
+            'familiar_name',
+            'serial_number',
+            'makemodel_category',
+            'makemodel_brand',
+            'makemodel',
+            'asset_number',
+            'barcode',
+            'hostname',
+            'roles',
+            'home',
+            'location',
+            'condition',
+            'inventory',
+            'keeper',
+            'borrower',
+            'lessor',
+            'inventoried_1',
+            'inventoried_2',
+            'notes',
+        ]
+
+        display_string=''
+        for fieldname in fieldnames:
+
+
+            if getattr(self, fieldname + '_use'):
+
+                if display_string > '':
+                    display_string =display_string + ', '
+
+                display_string = display_string + ' {} {} {}'.format( self._meta.get_field(fieldname + '_value').verbose_name, getattr(self, 'get_' + fieldname + '_operator_display' )(), getattr(self, fieldname + '_value') )
+
+        return display_string
 
     class Meta:
         unique_together=[['query_name', 'user']]

@@ -162,7 +162,6 @@ class ItemForm(ModelForm):
             'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
         }
 
-
 class MakeModelForm(ModelForm):
     duplicate = forms.BooleanField(label="Save and Duplicate", initial=False, required=False)
     class Meta:
