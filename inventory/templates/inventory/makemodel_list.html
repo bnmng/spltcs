@@ -24,10 +24,10 @@
                     <div>{% if perms.inventory.view_makemodel %}<a href="{% url 'makemodel_detail' object.id %}">View</a>{% else %}&nbsp;{% endif %}</div>
                     <div>{% if perms.inventory.change_makemodel %}<a href="{% url 'makemodel_update' object.id %}">Edit</a>{% else %}&nbsp;{% endif %}</div>
                 </div>
-                {% include 'spltcs/_list_field.html' with column=object.brand  span='4' %}
-                {% include 'spltcs/_list_field.html' with column=object.name  span='4' %}
-                {% include 'spltcs/_list_field.html' with column=object.part_number  span='3' %}
-                {% include 'spltcs/_list_field.html' with column=object.description  span='5' %}
+                {% include 'spltcs/_list_field.html' with column=object.brand span='4' %}
+                {% include 'spltcs/_list_field.html' with column=object.name span='4' %}
+                {% include 'spltcs/_list_field.html' with column=object.part_number span='3' %}
+                {% include 'spltcs/_list_field.html' with column=object.description span='5' %}
                 {% include 'spltcs/_list_many_field.html' with column=object.categories span='3' %}
             </div>
         {% endfor %}

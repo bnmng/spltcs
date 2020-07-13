@@ -53,6 +53,9 @@ class MakeModel(models.Model):
     part_number = models.CharField( 'Part Number', max_length=30, help_text='The part number or designation other than the marketed model name', blank=True)
     description = models.CharField( 'Description', max_length=100, help_text="The description (ex 'Laptop Computer', 'Tablet', 'Printer'", blank=True)
 
+    def categories(self):
+        return self.makemodelxcategory.all().values_list('category__name', flat=True)
+
     def __str__(self):
         return "{} {}".format(self.brand, self.name)
 
