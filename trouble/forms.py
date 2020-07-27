@@ -80,7 +80,6 @@ class TicketForm(ModelForm):
     class Meta:
         model=Ticket
         fields = [
-            'submitter',
             'item',
             'description',
             'impact',

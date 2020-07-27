@@ -11,10 +11,8 @@
 {% endblock %}
 {% block appmenu %}
     {% if user.is_authenticated %}
-        <div id="appmenu" class="menubar" >
-            <div class="menuticket ">
-                <a href="{% url 'ticket_list' %}">Tickets</a>
-            </div>
+        <div class="menuticket ">
+            <a href="{% url 'ticket_list' %}">Tickets</a>
         </div>
     {% endif %}
 {% endblock %}

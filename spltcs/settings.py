@@ -82,21 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'spltcs.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'host': 'localhost',
-#        'NAME': 'spltcs_dev',
-#        'USER': 'splvirginia',
-#        'PASSWORD': 'Nionfiei+01',
-#    }
-#}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

@@ -136,6 +136,21 @@ class RecallItemQueryForm(forms.Form):
     delete_item_query = forms.BooleanField(label='Delete', required=False)
 
 class ItemForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        hide_add_buttons = []
+
+        if 'hide_add_buttons' in kwargs:
+            hide_add_buttons = kwargs.pop('hide_add_buttons')
+
+        super().__init__(*args, **kwargs)
+
+        for button in hide_add_buttons:
+            self.fields[button].widget.attrs['data-hide_button']='True'
+            print('{}:{}'.format(inspect.currentframe().f_lineno, __file__))
+            print(self.fields[button].widget.attrs)
+
+
     duplicate = forms.BooleanField(label="Save and Duplicate", initial=False, required=False)
     class Meta:
         model=Item

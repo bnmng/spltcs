@@ -191,51 +191,17 @@ class TicketCreate(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        self.object = form.save()
 
-        ticketxroles=Ticket_TicketXRoleFormset(self.request.POST)
-        if ticketxroles.is_valid():
+        ticketresponses=Ticket_TicketResponseFormset(self.request.POST)
+        if ticketresponses.is_valid():
             print(inspect.currentframe().f_lineno)
-            ticketxroles.instance = self.object
-            ticketxroles.save()
-            print(inspect.currentframe().f_lineno)
-            print(ticketxroles)
+            ticketresponses.instance = self.object
+            ticketresponses.save()
         else:
             print(inspect.currentframe().f_lineno)
             print("Form Error")
-            print(ticketxroles.errors)
+            print(ticketresponses.errors)
 
-        description = 'Created: '
-        firstloop=True
-        for fieldname in form.cleaned_data:
-            try:
-                ticket_his = TicketHistory.objects.create(ticket=self.object, description = 'created with {} =  {}'.format(Ticket._meta.get_field(fieldname).verbose_name, form.cleaned_data[fieldname]))
-            except:
-                print ("Error creating history, fieldname=" + fieldname)
-                print(sys.exc_info()[0])
-                print(sys.exc_info()[1])
-                print(sys.exc_info()[2].tb_lineno)
-                
-        ticket_his = TicketHistory(ticket=self.object, description=description)
-        ticket_his.save()
-    
-        if 'duplicate' in form.cleaned_data:
-            if True == form.cleaned_data['duplicate']:
-                oldpk=self.object.pk
-                self.object.pk=None
-                self.object.familiar_name = '[copy]' + self.object.familiar_name
-                self.object.save()
-                
-                ticketxroles = TicketXRole.objects.filter(ticket_id=oldpk);
-                for ticketxrole in ticketxroles:
-                    print ( inspect.currentframe().f_lineno )
-                    ticketxrole.pk=None
-                    ticketxrole.ticket_id=self.object.pk
-                    ticketxrole.save()
-
-                return redirect( reverse_lazy('ticket_detail', kwargs={'pk': self.object.id }))
-
-        
         return response
 
     def get_success_url(self):
@@ -255,16 +221,11 @@ class TicketUpdate(PermissionRequiredMixin, UpdateView):
 
         context_data = super().get_context_data(**kwargs)
         if self.request.POST:
-            ticketxroles = Ticket_TicketXRoleFormset(self.request.POST, instance=self.object)
+            ticketresponses = Ticket_TicketResponsesFormset(self.request.POST, instance=self.object)
         else:
-            ticketxroles = Ticket_TicketXRoleFormset(instance=self.object)
+            ticketresponses = Ticket_TicketResonsesFormset(instance=self.object)
 
-        print(inspect.currentframe().f_lineno)
-        print(ticketxroles)
-        print(inspect.currentframe().f_lineno)
-        print(ticketxroles.empty_form)
-
-        context_data['ticketxroles']=ticketxroles
+        context_data['ticketresponses']=ticketresponses
 
         return context_data
 
@@ -273,40 +234,15 @@ class TicketUpdate(PermissionRequiredMixin, UpdateView):
         response = super().form_valid(form)
         
         self.object = form.save()
-        ticketxroles=Ticket_TicketXRoleFormset(self.request.POST, instance=self.object)
+        ticketresponses=Ticket_TicketResponsesFormset(self.request.POST, instance=self.object)
 
-        if ticketxroles.is_valid():
-            ticketxroles.instance = self.object
-            ticketxroles.save()
+        if ticketresponses.is_valid():
+            ticketreponses.instance = self.object
+            ticketresponses.save()
         else:
             print(inspect.currentframe().f_lineno)
             print("Form Error")
-            print(ticketxroles.errors)
-
-        for fieldname in form.changed_data:
-            try:
-                ticket_his = TicketHistory.objects.create(ticket=self.object, description = '{} changed from {} to {}'.format(Ticket._meta.get_field(fieldname).verbose_name, form.initial[fieldname], form.cleaned_data[fieldname]))
-            except:
-                print ("Error creating history, fieldname=" + fieldname)
-                print(sys.exc_info()[0])
-                print(sys.exc_info()[1])
-                print(sys.exc_info()[2].tb_lineno)
-
-        if 'duplicate' in form.cleaned_data:
-            if True == form.cleaned_data['duplicate']:
-                oldpk=self.object.pk
-                self.object.pk=None
-                self.object.familiar_name = '[copy]' + self.object.familiar_name
-                self.object.save()
-
-                ticketxroles = TicketXRole.objects.filter(ticket_id=oldpk);
-                for ticketxrole in ticketxroles:
-                    print ( inspect.currentframe().f_lineno )
-                    ticketxrole.pk=None
-                    ticketxrole.ticket_id=self.object.pk
-                    ticketxrole.save()
-                
-                return redirect( reverse_lazy('ticket_detail', kwargs={'pk': self.object.id }))
+            print(ticketresponses.errors)
 
         return response
 

@@ -14,7 +14,7 @@ class Ticket(models.Model):
     )
 
 
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True, help_text='The item associated with this ticket', related_name='ticket')
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True, help_text='The item associated with this ticket  You can leave this blank if unknown or N/A', related_name='ticket')
     submitter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, help_text='The user who submitted this ticket', related_name='submitted_ticket')
     description = models.TextField('description', help_text='Any notes for this ticket', blank=True)
     impact = models.IntegerField('impact', choices=IMPACT_CHOICES, default=1, help_text='The impact is this trouble having on operations?')
@@ -22,7 +22,7 @@ class Ticket(models.Model):
 
     def status(self):
         status=0
-        check_status=self.ticket_response_set
+        check_status=self.ticketresponse.all().latest('date_updated')
         if(check_status).exists():
             status=check_status.latest('date_updated').status
 
@@ -41,7 +41,7 @@ class TicketResponse(models.Model):
         (STATUS_HELD, 4),
         (STATUS_CLOSED, 10),
     )
-    ticket = models.ForeignKey(Ticket, related_name='response', on_delete=models.CASCADE, help_text='The ticket for this response')
+    ticket = models.ForeignKey(Ticket, related_name='ticketresponse', on_delete=models.CASCADE, help_text='The ticket for this response')
     updater = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, help_text='The tech who updated this ticket', related_name='ticket_update')
     status = models.IntegerField('status', choices=STATUS_CHOICES, default=0, help_text='The status of the ticket as of this update')
     notes = models.TextField('notes', help_text='Any notes for this update', blank=True)

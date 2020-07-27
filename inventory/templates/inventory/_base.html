@@ -11,19 +11,17 @@
 {% endblock %}
 {% block appmenu %}
     {% if user.is_authenticated %}
-        <div id="appmenu" class="menubar" >
-            <div class="menuitem ">
-                <a href="{% url 'item_list' %}">Items</a>
-            </div>
-            <div class="menuitem ">
-                <a href="{% url 'makemodel_list' %}">Models</a>
-            </div>
-            <div class="menuitem ">
-                <a href="{% url 'role_list' %}">Roles</a>
-            </div>
-            <div class="menuitem ">
-                <a href="{% url 'category_list' %}">Categories</a>
-            </div>
+        <div class="menuitem ">
+            <a href="{% url 'item_list' %}">Items</a>
+        </div>
+        <div class="menuitem ">
+            <a href="{% url 'makemodel_list' %}">Models</a>
+        </div>
+        <div class="menuitem ">
+            <a href="{% url 'role_list' %}">Roles</a>
+        </div>
+        <div class="menuitem ">
+            <a href="{% url 'category_list' %}">Categories</a>
         </div>
     {% endif %}
 {% endblock %}
