@@ -16,7 +16,6 @@ from django.views.generic.detail import ( DetailView, )
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView,)
 from django.views.generic.list import ListView
 from trouble.models import Ticket
-from varifields.models import(VariFieldObject, VariFieldSpec, VariFieldValue)
 import copy
 import inspect
 import json
@@ -221,9 +220,9 @@ class TicketUpdate(PermissionRequiredMixin, UpdateView):
 
         context_data = super().get_context_data(**kwargs)
         if self.request.POST:
-            ticketresponses = Ticket_TicketResponsesFormset(self.request.POST, instance=self.object)
+            ticketresponses = Ticket_TicketResponseFormset(self.request.POST, instance=self.object)
         else:
-            ticketresponses = Ticket_TicketResonsesFormset(instance=self.object)
+            ticketresponses = Ticket_TicketResponseFormset(instance=self.object)
 
         context_data['ticketresponses']=ticketresponses
 

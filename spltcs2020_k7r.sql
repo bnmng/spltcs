@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
--- Host: localhost    Database: spltcs_dev
+-- Host: localhost    Database: spltcs2020
 -- ------------------------------------------------------
 -- Server version	5.7.29-0ubuntu0.18.04.1
 
@@ -1338,4 +1338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-11 11:52:19
+-- Dump completed on 2020-07-27 15:07:46

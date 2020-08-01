@@ -43,13 +43,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'spltcs.apps.SPLTCSConfig', 
     'addable.apps.AddableConfig', 
-    'spltcs_users.apps.SPLTCSUsersConfig',
-    'home.apps.HomeConfig',
-    'inventory.apps.InventoryConfig',
     'entities.apps.EntitiesConfig',
+    'inventory.apps.InventoryConfig',
     'maintenance.apps.MaintenanceConfig',
     'trouble.apps.TroubleConfig',
-    'varifields.apps.VarifieldsConfig',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'spltcs_users.SPLTCSUser'
+AUTH_USER_MODEL = 'spltcs.SPLTCSUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

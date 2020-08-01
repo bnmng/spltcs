@@ -11,7 +11,6 @@ from django.views.generic.edit import (CreateView, DeleteView, UpdateView,)
 from django.views.generic.list import ListView
 from entities.forms import EntityForm
 from entities.models import Entity
-from varifields.models import(VariFieldObject, VariFieldSpec, VariFieldValue)
 import copy
 import inspect
 import json
