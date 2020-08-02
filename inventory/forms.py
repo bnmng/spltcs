@@ -159,8 +159,8 @@ class ItemForm(ModelForm):
         ]
         widgets = {
             'makemodel': Addable(attrs={'class':'hidden_button', 'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
-            'location': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
-            'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
+            'location': Addable(attrs={'class':'hidden_button', 'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
+            'home': Addable(attrs={'class':'hidden_button', 'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
         }
 
 class MakeModelForm(ModelForm):
