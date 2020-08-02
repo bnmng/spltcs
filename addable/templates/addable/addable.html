@@ -3,5 +3,4 @@
   {% include widget.template_name %}{% endfor %}{% if group_name %}
   </optgroup>{% endif %}{% endfor %}
 </select>
-<button id="button_add_{{ widget.name }}" class="button_addable" data-action="add" data-fieldname="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>Add</button> 
-
+<button {% if 'hidden_button' in widget.attrs.class %} style='display:none' {% endif %} id="button_add_{{ widget.name }}" class="button_addable" data-action="add" data-fieldname="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>Add</button> 

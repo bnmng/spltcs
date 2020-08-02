@@ -86,14 +86,22 @@ class ItemList(PermissionRequiredMixin, ListView):
             print('{} {}'.format('{} {}'.format(inspect.currentframe().f_lineno, __file__), __file__) )
             item_query_queryset = ItemQuery.objects.all() 
             if item_query_queryset.exists():
-                item_query = item_query_queryset[0]
-                for field in item_query._meta.get_fields():
-                    if 'ManyRelatedManager' == getattr(item_query, field.name).__class__.__name__:
-                        raw_filter_parameters[field.name]=[]
-                        for obj in getattr(item_query, field.name).all():
-                            raw_filter_parameters[field.name].append(obj)
-                    else:
-                        raw_filter_parameters[field.name]=getattr(item_query, field.name)
+                try:
+                    item_query = item_query_queryset[0]
+                    for field in item_query._meta.get_fields():
+                        if 'ManyRelatedManager' == getattr(item_query, field.name).__class__.__name__:
+                            raw_filter_parameters[field.name]=[]
+                            for obj in getattr(item_query, field.name).all():
+                                raw_filter_parameters[field.name].append(obj)
+                        else:
+                            raw_filter_parameters[field.name]=getattr(item_query, field.name)
+                except Exception as e:
+                    print('{} {}'.format(inspect.currentframe().f_lineno, __file__))
+                    print("Exception")
+                    print(e)
+                    for i in sys.exc_info():
+                        print (i)
+                    raw_filer_parameters={}
 
         if 'quick_search_use' in raw_filter_parameters:
             if True == raw_filter_parameters['quick_search_use']:
@@ -219,20 +227,6 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
             print("Form Error")
             print(itemxroles.errors)
 
-        description = 'Created: '
-        firstloop=True
-        for fieldname in form.cleaned_data:
-            try:
-                item_his = ItemHistory.objects.create(item=self.object, description = 'created with {} =  {}'.format(Item._meta.get_field(fieldname).verbose_name, form.cleaned_data[fieldname]))
-            except:
-                print ("Error creating history, fieldname=" + fieldname)
-                print(sys.exc_info()[0])
-                print(sys.exc_info()[1])
-                print(sys.exc_info()[2].tb_lineno)
-                
-        item_his = ItemHistory(item=self.object, description=description)
-        item_his.save()
-    
         if 'duplicate' in form.cleaned_data:
             if True == form.cleaned_data['duplicate']:
                 oldpk=self.object.pk
@@ -248,7 +242,6 @@ class ItemCreate(PermissionRequiredMixin, CreateView):
                     itemxrole.save()
 
                 return redirect( reverse_lazy('item_detail', kwargs={'pk': self.object.id }))
-
         
         return response
 

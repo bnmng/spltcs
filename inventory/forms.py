@@ -137,20 +137,6 @@ class RecallItemQueryForm(forms.Form):
 
 class ItemForm(ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        hide_add_buttons = []
-
-        if 'hide_add_buttons' in kwargs:
-            hide_add_buttons = kwargs.pop('hide_add_buttons')
-
-        super().__init__(*args, **kwargs)
-
-        for button in hide_add_buttons:
-            self.fields[button].widget.attrs['data-hide_button']='True'
-            print('{}:{}'.format(inspect.currentframe().f_lineno, __file__))
-            print(self.fields[button].widget.attrs)
-
-
     duplicate = forms.BooleanField(label="Save and Duplicate", initial=False, required=False)
     class Meta:
         model=Item
@@ -172,7 +158,7 @@ class ItemForm(ModelForm):
             'inventoried',
         ]
         widgets = {
-            'makemodel': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
+            'makemodel': Addable(attrs={'class':'hidden_button', 'data-add_url':reverse_lazy('item_ajax_makemodel'), 'data-iframe':'iframe_makemodel', 'data-primaries':'id_makemodel', 'data-secondaries':''}),
             'location': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_location', 'data-primaries':'id_location', 'data-secondaries':'id_home'}),
             'home': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_location'), 'data-iframe':'iframe_home', 'data-primaries':'id_home', 'data-secondaries':'id_location'}),
         }

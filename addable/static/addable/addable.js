@@ -1,3 +1,15 @@
+function showAddButton(perm, button_id) {
+  if('True'==perm) {
+    var buttonAdd = document.getElementById(button_id);
+    if(buttonAdd != null){
+      var style=buttonAdd.getAttribute('style');
+      if( '' < style ) {
+        buttonAdd.setAttribute('style', style.replace('display:none',''));
+      }
+    }
+  }
+}
+
 function openModelForm(button) {
 
   var fieldname = button.getAttribute('data-fieldname');
