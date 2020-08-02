@@ -206,7 +206,7 @@ class Item_ItemXRoleForm(ModelForm):
             'role',
         ]
         widgets = {
-            'role': Addable(attrs={'data-add_url':reverse_lazy('item_ajax_role'), 'data-secondaries':''}),
+            'role': Addable(attrs={'class':'hidden_button','data-add_url':reverse_lazy('item_ajax_role'), 'data-secondaries':''}),
         }
 
 class Role_ItemXRoleForm(ModelForm):

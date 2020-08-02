@@ -1,10 +1,21 @@
 function showAddButton(perm, button_id) {
   if('True'==perm) {
     var buttonAdd = document.getElementById(button_id);
-    if(buttonAdd != null){
+    if( buttonAdd != null ) {
       var style=buttonAdd.getAttribute('style');
       if( '' < style ) {
         buttonAdd.setAttribute('style', style.replace('display:none',''));
+      }
+    } else {
+      var buttonAdds = document.getElementsByClassName("button_addable");
+      for( b=0; b<buttonAdds.length; b++ ) {
+        var buttonAdd = buttonAdds[b];
+        if( buttonAdd.id.match(button_id)) {
+          var style=buttonAdd.getAttribute('style');
+          if( '' < style ) {
+            buttonAdd.setAttribute('style', style.replace('display:none',''));
+          }
+        }
       }
     }
   }
